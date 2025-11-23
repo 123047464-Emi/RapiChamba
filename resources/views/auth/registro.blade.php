@@ -275,6 +275,18 @@
                 padding: 20px;
             }
         }
+        .input-error {
+            border: 2px solid #e74c3c; /* rojo */
+        }
+        .error-label {
+            display: inline-block;
+            background: #e74c3c;
+            color: #fff;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-top: 4px;
+        }
     </style>
 </head>
 

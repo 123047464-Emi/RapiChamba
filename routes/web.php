@@ -14,6 +14,10 @@ Route::get('/', function () {
 });
 
 
+Route::get('/home', function () {
+    return view('home');
+});
+
 Route::get('/login', function () {
     return view('auth.login');
 });
@@ -53,6 +57,7 @@ Route::get('/api/calles/{coloniaId}', [CalleController::class, 'byColonia']);
 // Habilidades
 Route::get('/api/habilidades', [HabilidadController::class, 'index']);
 
+Route::get('/postulacion/{id}', [PostulacionController::class, 'create'])->name('postulacion.create');
 
 //FALTANTES
 
@@ -72,10 +77,10 @@ Route::get('/pagosdetalles', function () {
 Route::get('/perfilempleado', function () {
     return view('Empleado.perfilempleado'); 
 });
-Route::get('/dashboardEmpleado', function () {
-    return view('Empleado.dashboardEmpleado'); 
-});
 
+Route::get('/dashboardEmpleado', function () {
+    return view('Empleado.dashboardEmpleado');
+})->name('empleado.dashboardEmpleado');
 
 
 
@@ -91,6 +96,7 @@ Route::get('/metodoPago', function () {
     return view('Empleador.metodoPago'); 
 });
 
+
 Route::get('/dashboardEmpleador', function () {
-    return view('Empleador.dashboardEmpleador'); 
-});
+    return view('empleador.dashboardEmpleador');
+})->name('empleador.dashboardEmpleador');

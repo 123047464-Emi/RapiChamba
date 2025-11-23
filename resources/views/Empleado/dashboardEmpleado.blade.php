@@ -2,6 +2,8 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rapichamba - Trabajador</title>
     <style>
@@ -509,5 +511,22 @@
             }
         }
     </script>
+@if(session('success'))
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "{{ session('success') }}",
+            text: "Tu cuenta se ha creado correctamente 🎉",
+            imageUrl: "{{ asset('img/Logo.png') }}", 
+            imageWidth: 100,
+            imageHeight: 100,
+            imageAlt: "Logo RapiChamba",
+            showConfirmButton: false,
+            timer: 3000
+        });
+    </script>
+@endif
 </body>
 </html>
