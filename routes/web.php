@@ -22,7 +22,6 @@ Route::get('/', function () {
 })->name('home');
 
 
-<<<<<<< HEAD
 Route::get('/home', function () {
     return view('home');
 });
@@ -31,7 +30,6 @@ Route::get('/home', function () {
 // --- AUTENTICACIÓN ---
 
 // Login
->>>>>>> 9644e8551f0175f96868bbd89eaf998ffe3641bb
 Route::get('/login', function () {
     return view('auth.login');
 })->name('login'); // Es importante llamar 'login' a esta ruta para los redireccionamientos de Laravel
@@ -52,7 +50,7 @@ Route::get('/dashboard', function () {
     return view('dashboard'); 
 })->name('dashboard');
 
-<<<<<<< HEAD
+
 
 // Estados
 Route::get('/api/estados', [EstadoController::class, 'index']);
@@ -77,9 +75,8 @@ Route::get('/postulacion/{id}', [PostulacionController::class, 'create'])->name(
 //FALTANTES
 
 //Dashboard
-=======
+
 // Empleado
->>>>>>> 9644e8551f0175f96868bbd89eaf998ffe3641bb
 Route::get('/dashboardEmpleado', function () {
     return view('Empleado.dashboardEmpleado'); 
 })->name('empleado.dashboard');
@@ -94,16 +91,12 @@ Route::get('/pagosdetalles', function () {
 
 Route::get('/perfilempleado', function () {
     return view('Empleado.perfilempleado'); 
-<<<<<<< HEAD
+
 });
 
 Route::get('/dashboardEmpleado', function () {
     return view('Empleado.dashboardEmpleado');
 })->name('empleado.dashboardEmpleado');
-=======
-})->name('empleado.perfil');
->>>>>>> 9644e8551f0175f96868bbd89eaf998ffe3641bb
-
 
 // Empleador
 Route::get('/dashboardEmpleador', function () {
@@ -123,20 +116,19 @@ Route::get('/metodoPago', function () {
 })->name('empleador.pago');
 
 
-<<<<<<< HEAD
 Route::get('/dashboardEmpleador', function () {
     return view('empleador.dashboardEmpleador');
 })->name('empleador.dashboardEmpleador');
-=======
+
+
 // --- API / SELECTORES DINÁMICOS ---
 // (Estas rutas devuelven JSON para tus dropdowns de ubicación)
 
-Route::get('/api/estados', [EstadoController::class, 'index']);
-Route::get('/api/municipios', [MunicipioController::class, 'index']);
-Route::get('/api/municipios/{estadoId}', [MunicipioController::class, 'byEstado']);
-Route::get('/api/colonias', [ColoniaController::class, 'index']);
-Route::get('/api/colonias/{municipioId}', [ColoniaController::class, 'byMunicipio']);
-Route::get('/api/calles', [CalleController::class, 'index']);
-Route::get('/api/calles/{coloniaId}', [CalleController::class, 'byColonia']);
-Route::get('/api/habilidades', [HabilidadController::class, 'index']);
->>>>>>> 9644e8551f0175f96868bbd89eaf998ffe3641bb
+#Route::get('/api/estados', [EstadoController::class, 'index']);
+#Route::get('/api/municipios', [MunicipioController::class, 'index']);
+#Route::get('/api/municipios/{estadoId}', [MunicipioController::class, 'byEstado']);
+#Route::get('/api/colonias', [ColoniaController::class, 'index']);
+#Route::get('/api/colonias/{municipioId}', [ColoniaController::class, 'byMunicipio']);
+#Route::get('/api/calles', [CalleController::class, 'index']);
+#Route::get('/api/calles/{coloniaId}', [CalleController::class, 'byColonia']);
+#Route::get('/api/habilidades', [HabilidadController::class, 'index']);
