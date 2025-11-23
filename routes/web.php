@@ -78,7 +78,7 @@ Route::get('/postulacion/{id}', [PostulacionController::class, 'create'])->name(
 // Empleado
 Route::get('/dashboardEmpleado', function () {
     return view('Empleado.dashboardEmpleado'); 
-})->name('empleado.dashboard');
+})->name('empleado.dashboardEmpleado');
 
 Route::get('/detalles', function () {
     return view('Empleado.detalles'); 
@@ -93,14 +93,11 @@ Route::get('/perfilempleado', function () {
 
 });
 
-Route::get('/dashboardEmpleado', function () {
-    return view('Empleado.dashboardEmpleado');
-})->name('empleado.dashboardEmpleado');
 
 // Empleador
 Route::get('/dashboardEmpleador', function () {
     return view('Empleador.dashboardEmpleador'); 
-})->name('empleador.dashboard');
+})->name('empleador.dashboardEmpleador');
 
 Route::get('/detalleEmpleador', function () {
     return view('Empleador.detalleEmpleador'); 
@@ -114,10 +111,6 @@ Route::get('/metodoPago', function () {
     return view('Empleador.metodoPago'); 
 })->name('empleador.pago');
 
-
-Route::get('/dashboardEmpleador', function () {
-    return view('empleador.dashboardEmpleador');
-})->name('empleador.dashboardEmpleador');
 
 
 // --- API / SELECTORES DINÁMICOS ---
