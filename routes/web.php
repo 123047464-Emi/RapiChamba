@@ -9,35 +9,50 @@ use App\Http\Controllers\ColoniaController;
 use App\Http\Controllers\CalleController;
 use App\Http\Controllers\HabilidadController;
 
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+*/
+
+// --- PÁGINAS PÚBLICAS ---
+
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('home');    
+})->name('home');
 
 
+<<<<<<< HEAD
 Route::get('/home', function () {
     return view('home');
 });
 
+=======
+// --- AUTENTICACIÓN ---
+
+// Login
+>>>>>>> 9644e8551f0175f96868bbd89eaf998ffe3641bb
 Route::get('/login', function () {
     return view('auth.login');
-});
+})->name('login'); // Es importante llamar 'login' a esta ruta para los redireccionamientos de Laravel
 
+Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
 
-Route::post('/login', [LoginController::class, 'login'])->name('login');
-
-
+// Registro
 Route::get('/registro', function () {
-    return view('auth.registro'); // tu vista Blade con el formulario
-});
-
+    return view('auth.registro'); 
+})->name('registro');
 
 Route::post('/registro', [RegistroController::class, 'registrar'])->name('registro.registrar');
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard'); // tu vista Blade con el formulario
-});
+// --- ZONA PRIVADA (DASHBOARDS) ---
 
+Route::get('/dashboard', function () {
+    return view('dashboard'); 
+})->name('dashboard');
+
+<<<<<<< HEAD
 
 // Estados
 Route::get('/api/estados', [EstadoController::class, 'index']);
@@ -62,41 +77,66 @@ Route::get('/postulacion/{id}', [PostulacionController::class, 'create'])->name(
 //FALTANTES
 
 //Dashboard
+=======
+// Empleado
+>>>>>>> 9644e8551f0175f96868bbd89eaf998ffe3641bb
 Route::get('/dashboardEmpleado', function () {
-    return view('dashboardEmpleado');
-});
+    return view('Empleado.dashboardEmpleado'); 
+})->name('empleado.dashboard');
 
 Route::get('/detalles', function () {
     return view('Empleado.detalles'); 
-});
+})->name('empleado.detalles');
 
 Route::get('/pagosdetalles', function () {
     return view('Empleado.pagosdetalles'); 
-});
+})->name('empleado.pagos');
 
 Route::get('/perfilempleado', function () {
     return view('Empleado.perfilempleado'); 
+<<<<<<< HEAD
 });
 
 Route::get('/dashboardEmpleado', function () {
     return view('Empleado.dashboardEmpleado');
 })->name('empleado.dashboardEmpleado');
+=======
+})->name('empleado.perfil');
+>>>>>>> 9644e8551f0175f96868bbd89eaf998ffe3641bb
 
 
+// Empleador
+Route::get('/dashboardEmpleador', function () {
+    return view('Empleador.dashboardEmpleador'); 
+})->name('empleador.dashboard');
 
 Route::get('/detalleEmpleador', function () {
     return view('Empleador.detalleEmpleador'); 
-});
+})->name('empleador.detalles');
 
 Route::get('/perfilempleador', function () {
     return view('Empleador.perfilempleador');
-});
+})->name('empleador.perfil');
 
 Route::get('/metodoPago', function () {
     return view('Empleador.metodoPago'); 
-});
+})->name('empleador.pago');
 
 
+<<<<<<< HEAD
 Route::get('/dashboardEmpleador', function () {
     return view('empleador.dashboardEmpleador');
 })->name('empleador.dashboardEmpleador');
+=======
+// --- API / SELECTORES DINÁMICOS ---
+// (Estas rutas devuelven JSON para tus dropdowns de ubicación)
+
+Route::get('/api/estados', [EstadoController::class, 'index']);
+Route::get('/api/municipios', [MunicipioController::class, 'index']);
+Route::get('/api/municipios/{estadoId}', [MunicipioController::class, 'byEstado']);
+Route::get('/api/colonias', [ColoniaController::class, 'index']);
+Route::get('/api/colonias/{municipioId}', [ColoniaController::class, 'byMunicipio']);
+Route::get('/api/calles', [CalleController::class, 'index']);
+Route::get('/api/calles/{coloniaId}', [CalleController::class, 'byColonia']);
+Route::get('/api/habilidades', [HabilidadController::class, 'index']);
+>>>>>>> 9644e8551f0175f96868bbd89eaf998ffe3641bb

@@ -1,27 +1,26 @@
 @extends('layouts.app')
 
+@section('title', 'Inicio')
 
 @section('content')
 
-<!-- Hero Section -->
 <section class="hero">
     <div class="hero-content">
         <h1>Soluciones rápidas, ingresos extra. Al alcance de un clic.</h1>
         <p>Conectamos personas que requieren apoyo con quienes pueden brindarlo. De forma segura, rápida y confiable.</p>
         <div class="hero-buttons">
-            <button class="btn btn-primary">Trabajador</button>
-            <button class="btn btn-secondary">Empleador</button>
+            <a href="{{ route('empleado.dashboard') }}" class="btn btn-primary">Soy Trabajador</a>
+            <a href="{{ route('empleador.dashboard') }}" class="btn btn-secondary">Soy Empleador</a>
         </div>
     </div>
 
     <div class="hero-image">
         <div class="circle-logo">
-            <img src="{{ asset('img/Logo.png') }}" alt="Logo Rapichamba">
+            <img src="{{ asset('img/Logo.png') }}" alt="Logo Rapichamba" onerror="this.style.display='none'">
         </div>
     </div>
 </section>
 
-<!-- How it Works Section -->
 <section class="section">
     <h2 class="section-title">¿Cómo funciona RapiChamba?</h2>
     <div class="steps">
@@ -43,7 +42,6 @@
     </div>
 </section>
 
-<!-- Users Section -->
 <section class="section users-section">
     <h2 class="section-title">Para cada tipo de usuario</h2>
     <div class="users-grid">
@@ -56,7 +54,7 @@
                 <li>Trabaja cuando quieras</li>
                 <li>Construye tu reputación</li>
             </ul>
-            <button class="btn btn-primary">Trabajador</button>
+            <a href="{{ route('registro') }}" class="btn btn-primary">Registrarme como Trabajador</a>
         </div>
 
         <div class="user-card">
@@ -68,16 +66,15 @@
                 <li>Califica el servicio</li>
                 <li>Publica trabajos en minutos</li>
             </ul>
-            <button class="btn btn-primary">Empleador</button>
+            <a href="{{ route('registro') }}" class="btn btn-primary">Registrarme como Empleador</a>
         </div>
     </div>
 </section>
 
-<!-- CTA Section -->
 <section class="cta-section">
     <h2>¡Únete a la comunidad Rapichamba hoy!</h2>
     <p>Empieza a resolver o a generar ingresos.</p>
-    <button class="btn btn-white">Crear mi cuenta</button>
+    <a href="{{ route('registro') }}" class="btn btn-white">Crear mi cuenta</a>
 </section>
 
 @endsection
