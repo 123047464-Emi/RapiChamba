@@ -17,8 +17,9 @@ class Empleador extends Model
     ];
 
     //Un empleador es un usuario
-    public function usuarios(){
-        return $this->belongTo(Usuarios::class, 'idUsuario', 'id');
+    public function usuario()
+    {
+        return $this->belongsTo(User::class, 'idUsuario', 'id');
     }
 
 }

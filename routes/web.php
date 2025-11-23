@@ -8,12 +8,8 @@ use App\Http\Controllers\MunicipioController;
 use App\Http\Controllers\ColoniaController;
 use App\Http\Controllers\CalleController;
 use App\Http\Controllers\HabilidadController;
+use App\Http\Controllers\MostrarTareasController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-*/
 
 // --- PÁGINAS PÚBLICAS ---
 
@@ -76,9 +72,9 @@ Route::get('/postulacion/{id}', [PostulacionController::class, 'create'])->name(
 //Dashboard
 
 // Empleado
-Route::get('/dashboardEmpleado', function () {
-    return view('Empleado.dashboardEmpleado'); 
-})->name('empleado.dashboardEmpleado');
+//Route::get('/dashboardEmpleado', function () {
+    //return view('Empleado.dashboardEmpleado'); 
+//})->name('empleado.dashboardEmpleado');
 
 Route::get('/detalles', function () {
     return view('Empleado.detalles'); 
@@ -90,9 +86,11 @@ Route::get('/pagosdetalles', function () {
 
 Route::get('/perfilempleado', function () {
     return view('Empleado.perfilempleado'); 
+})->name('empleado.perfilEmpleado');;
 
-});
 
+Route::get('/dashboardEmpleado', [MostrarTareasController::class, 'dashboardEmpleado'])
+     ->name('empleado.dashboardEmpleado');
 
 // Empleador
 Route::get('/dashboardEmpleador', function () {
