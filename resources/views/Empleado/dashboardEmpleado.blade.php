@@ -558,7 +558,6 @@
         }
 
         function postularse(tareaId) {
-            // Aquí puedes agregar la lógica para postularse
             Swal.fire({
                 title: '¿Deseas postularte a esta tarea?',
                 text: "Se enviará tu solicitud al empleador",
@@ -570,16 +569,41 @@
                 cancelButtonText: 'Cancelar'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Aquí harías la petición AJAX para postularse
-                    // Por ahora solo mostramos un mensaje
-                    Swal.fire(
-                        '¡Postulado!',
-                        'Tu solicitud ha sido enviada correctamente',
-                        'success'
-                    );
+                    fetch(`/postularse/${tareaId}`, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({})
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            Swal.fire(
+                                '¡Postulado!',
+                                data.message,
+                                'success'
+                            );
+                        } else {
+                            Swal.fire(
+                                'Error',
+                                'No se pudo registrar tu postulación',
+                                'error'
+                            );
+                        }
+                    })
+                    .catch(() => {
+                        Swal.fire(
+                            'Error',
+                            'Ocurrió un problema con la conexión',
+                            'error'
+                        );
+                    });
                 }
             });
         }
+
     </script>
 </body>
 </html>
