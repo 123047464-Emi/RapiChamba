@@ -9,88 +9,86 @@ use App\Http\Controllers\ColoniaController;
 use App\Http\Controllers\CalleController;
 use App\Http\Controllers\HabilidadController;
 
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+*/
+
+// --- PÁGINAS PÚBLICAS ---
+
 Route::get('/', function () {
     return view('home');    
-});
+})->name('home');
 
 
+// --- AUTENTICACIÓN ---
+
+// Login
 Route::get('/login', function () {
     return view('auth.login');
-});
+})->name('login'); // Es importante llamar 'login' a esta ruta para los redireccionamientos de Laravel
 
+Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
 
-Route::post('/login', [LoginController::class, 'login'])->name('login');
-
-
+// Registro
 Route::get('/registro', function () {
-    return view('auth.registro'); // tu vista Blade con el formulario
-});
-
+    return view('auth.registro'); 
+})->name('registro');
 
 Route::post('/registro', [RegistroController::class, 'registrar'])->name('registro.registrar');
 
 
+// --- ZONA PRIVADA (DASHBOARDS) ---
+
 Route::get('/dashboard', function () {
-    return view('dashboard'); // tu vista Blade con el formulario
-});
+    return view('dashboard'); 
+})->name('dashboard');
 
-
-// Estados
-Route::get('/api/estados', [EstadoController::class, 'index']);
-
-// Municipios (todos o filtrados por estado)
-Route::get('/api/municipios', [MunicipioController::class, 'index']);
-Route::get('/api/municipios/{estadoId}', [MunicipioController::class, 'byEstado']);
-
-// Colonias (todas o filtradas por municipio)
-Route::get('/api/colonias', [ColoniaController::class, 'index']);
-Route::get('/api/colonias/{municipioId}', [ColoniaController::class, 'byMunicipio']);
-
-// Calles (todas o filtradas por colonia)
-Route::get('/api/calles', [CalleController::class, 'index']);
-Route::get('/api/calles/{coloniaId}', [CalleController::class, 'byColonia']);
-
-// Habilidades
-Route::get('/api/habilidades', [HabilidadController::class, 'index']);
-
-
-//FALTANTES
-
-//Dashboard
+// Empleado
 Route::get('/dashboardEmpleado', function () {
-    return view('dashboardEmpleado');
-});
+    return view('Empleado.dashboardEmpleado'); 
+})->name('empleado.dashboard');
 
 Route::get('/detalles', function () {
     return view('Empleado.detalles'); 
-});
+})->name('empleado.detalles');
 
 Route::get('/pagosdetalles', function () {
     return view('Empleado.pagosdetalles'); 
-});
+})->name('empleado.pagos');
 
 Route::get('/perfilempleado', function () {
     return view('Empleado.perfilempleado'); 
-});
-Route::get('/dashboardEmpleado', function () {
-    return view('Empleado.dashboardEmpleado'); 
-});
+})->name('empleado.perfil');
 
 
-
+// Empleador
+Route::get('/dashboardEmpleador', function () {
+    return view('Empleador.dashboardEmpleador'); 
+})->name('empleador.dashboard');
 
 Route::get('/detalleEmpleador', function () {
     return view('Empleador.detalleEmpleador'); 
-});
+})->name('empleador.detalles');
 
 Route::get('/perfilempleador', function () {
     return view('Empleador.perfilempleador');
-});
+})->name('empleador.perfil');
 
 Route::get('/metodoPago', function () {
     return view('Empleador.metodoPago'); 
-});
+})->name('empleador.pago');
 
-Route::get('/dashboardEmpleador', function () {
-    return view('Empleador.dashboardEmpleador'); 
-});
+
+// --- API / SELECTORES DINÁMICOS ---
+// (Estas rutas devuelven JSON para tus dropdowns de ubicación)
+
+Route::get('/api/estados', [EstadoController::class, 'index']);
+Route::get('/api/municipios', [MunicipioController::class, 'index']);
+Route::get('/api/municipios/{estadoId}', [MunicipioController::class, 'byEstado']);
+Route::get('/api/colonias', [ColoniaController::class, 'index']);
+Route::get('/api/colonias/{municipioId}', [ColoniaController::class, 'byMunicipio']);
+Route::get('/api/calles', [CalleController::class, 'index']);
+Route::get('/api/calles/{coloniaId}', [CalleController::class, 'byColonia']);
+Route::get('/api/habilidades', [HabilidadController::class, 'index']);

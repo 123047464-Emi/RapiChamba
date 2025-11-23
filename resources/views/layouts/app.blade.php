@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'RAPICHAMBA - Soluciones rápidas')</title>
     
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
         * {
@@ -339,9 +338,9 @@
         </div>
         <div class="brand-name">RAPICHAMBA</div>
     </div>
-        <div class="header-buttons">
-            <button class="btn btn-primary">Iniciar sesión</button>
-            <button class="btn btn-primary">Registrarse</button>
+        <div class="auth-buttons">
+            <a href="{{ route('login') }}" class="btn btn-primary" style="text-decoration: none;">Iniciar sesión</a>
+            <a href="{{ route('registro') }}" class="btn btn-secondary" style="text-decoration: none;">Registrarse</a>
         </div>
     </header>
 
