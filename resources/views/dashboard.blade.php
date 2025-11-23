@@ -1,90 +1,130 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rapichamba - Home</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapichamba - Encuentra Chambas</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #CADBE7 0%, #97BCCD7 50%);
-            min-height: 100vh;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Círculos decorativos */
+        .circle-decoration {
+            position: fixed;
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .circle-top-right {
+            width: 450px;
+            height: 450px;
+            top: -100px;
+            right: -300px;
+            background: transparent;
+            border: 50px solid #1D40AE;
+        }
+
+        .circle-top-right-second {
+            width: 500px;
+            height: 500px;
+            top: -100px;
+            right: -100px;
+            background: transparent;
+            border: 50px solid #1D40AE;
+        }
+
+        .circle-bottom-left {
+            width: 550px;
+            height: 550px;
+            bottom: -225px; 
+            left: -200px;
+            background: transparent;
+            border: 60px solid #1D40AE;
+        }
+
+        /* Header */
         .header {
             background: white;
-            padding: 1rem 1.5rem;
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 8px rgba(27, 71, 105, 0.1);
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #1B4769;
-        }
-
-        .logo span { color: #507FA9; }
-
-        .header-actions {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-
-        .notification-btn {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             position: relative;
-            background: #CADBE7;
-            border: none;
-            width: 40px;
-            height: 40px;
+            z-index: 10;
+            border-bottom: 3px solid #1D40AE;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            border: 3px solid #1D40AE;
             border-radius: 50%;
-            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s;
+            font-size: 1.5rem;
         }
 
-        .notification-btn:hover {
-            background: #97BCCD7;
-            transform: scale(1.05);
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1D40AE;
+            text-transform: uppercase;
         }
 
-        .notification-badge {
-            position: absolute;
-            top: -2px;
-            right: -2px;
-            background: #507FA9;
-            color: white;
-            font-size: 0.7rem;
-            padding: 2px 6px;
-            border-radius: 10px;
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
         }
 
-        .avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #507FA9, #75A4C5);
-            cursor: pointer;
-            border: 2px solid #97BCCD7;
-            transition: transform 0.3s;
+        .nav-link {
+            color: #1D40AE;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: opacity 0.3s;
         }
 
-        .avatar:hover { transform: scale(1.1); }
+        .nav-link:hover {
+            opacity: 0.7;
+        }
 
+        /* Container */
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem 1.5rem;
+            padding: 3rem 2rem;
+            position: relative;
+            z-index: 1;
         }
 
-        .user-type-toggle {
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        /* User Type Toggle */
+        .user-toggle {
             display: flex;
             justify-content: center;
             gap: 0.5rem;
@@ -92,135 +132,169 @@
         }
 
         .toggle-btn {
-            padding: 0.5rem 1.5rem;
-            border: 2px solid #507FA9;
+            padding: 10px 20px;
+            border: none;
             background: white;
-            color: #507FA9;
-            border-radius: 20px;
+            color: #1D40AE;
+            border-radius: 25px;
             cursor: pointer;
             transition: all 0.3s;
             font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
-        .toggle-btn.active { background: #507FA9; color: white; }
+        .toggle-btn.active {
+            background: #1D40AE;
+            color: white;
+        }
+
+        .toggle-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(29, 64, 174, 0.3);
+        }
+
+        /* Views */
+        .view-content {
+            display: none;
+        }
+
+        .view-content.active {
+            display: block;
+        }
+
+        /* TRABAJADOR VIEW */
+        .hero-title {
+            font-size: 2rem;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
 
         .search-section {
             background: white;
             border-radius: 15px;
             padding: 1.5rem;
             margin-bottom: 2rem;
-            box-shadow: 0 4px 12px rgba(27, 71, 105, 0.15);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
         }
 
-        .search-container { display: flex; gap: 0.5rem; }
+        .search-container {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
 
         .search-input {
             flex: 1;
-            padding: 1rem;
-            border: 2px solid #CADBE7;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: border 0.3s;
+            padding: 12px 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.3s;
         }
 
         .search-input:focus {
             outline: none;
-            border-color: #507FA9;
+            border-color: #1D40AE;
+            box-shadow: 0 0 0 3px rgba(29, 64, 174, 0.1);
         }
 
-        .filter-btn {
-            background: #507FA9;
+        .search-btn {
+            background: #1D40AE;
             color: white;
             border: none;
-            padding: 1rem 1.5rem;
-            border-radius: 10px;
+            padding: 12px 24px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s;
+            font-size: 15px;
         }
 
-        .filter-btn:hover { background: #1B4769; transform: translateY(-2px); }
+        .search-btn:hover {
+            background: #152e7f;
+            transform: translateY(-2px);
+        }
 
-        .view-toggle {
+        .categories-grid {
             display: flex;
             justify-content: center;
-            margin-bottom: 2rem;
-            background: white;
-            width: fit-content;
-            margin-left: auto;
-            margin-right: auto;
-            border-radius: 25px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(27, 71, 105, 0.1);
-        }
-
-        .view-btn {
-            padding: 0.75rem 2rem;
-            border: none;
-            background: white;
-            color: #507FA9;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .view-btn.active { background: #507FA9; color: white; }
-
-        .categories-section { margin-bottom: 2rem; }
-
-        .section-title {
-            color: #1B4769;
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-
-        .categories-carousel {
-            display: flex;
             gap: 1rem;
-            overflow-x: auto;
-            padding-bottom: 1rem;
-            scrollbar-width: thin;
-            scrollbar-color: #507FA9 #CADBE7;
+            flex-wrap: wrap;
         }
 
-        .category-card {
-            min-width: 100px;
-            background: white;
-            border-radius: 15px;
-            padding: 1rem;
-            text-align: center;
+        .category-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0.5rem;
             cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 2px 8px rgba(27, 71, 105, 0.1);
+            transition: transform 0.3s;
         }
 
-        .category-card:hover {
+        .category-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 4px 16px rgba(27, 71, 105, 0.2);
         }
 
         .category-icon {
             width: 60px;
             height: 60px;
-            background: linear-gradient(135deg, #75A4C5, #97BCCD7);
+            background: white;
             border-radius: 50%;
-            margin: 0 auto 0.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         .category-name {
-            color: #1B4769;
-            font-size: 0.9rem;
-            font-weight: 600;
+            font-size: 0.85rem;
+            color: #333;
+            font-weight: 500;
         }
 
-        .feed-section {
+        .view-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .view-btn {
+            padding: 8px 16px;
+            border: none;
+            background: white;
+            color: #1D40AE;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .view-btn.active {
+            background: #1D40AE;
+            color: white;
+        }
+
+        .opportunities-section {
+            margin-top: 3rem;
+        }
+
+        .section-title {
+            color: #1D40AE;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+
+        .opportunities-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 1.5rem;
         }
 
@@ -228,233 +302,486 @@
             background: white;
             border-radius: 15px;
             padding: 1.5rem;
-            box-shadow: 0 2px 12px rgba(27, 71, 105, 0.1);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
             transition: all 0.3s;
             cursor: pointer;
         }
 
         .job-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 6px 20px rgba(27, 71, 105, 0.2);
+            box-shadow: 0 6px 20px rgba(29, 64, 174, 0.2);
         }
 
-        .card-header {
+        .job-header {
             display: flex;
             justify-content: space-between;
             align-items: start;
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
         }
 
-        .card-title {
-            color: #1B4769;
-            font-size: 1.1rem;
-            font-weight: 700;
+        .job-title {
+            color: #333;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
         }
 
-        .card-price {
-            color: #507FA9;
+        .job-price {
+            color: #1D40AE;
             font-size: 1.3rem;
             font-weight: 700;
         }
 
-        .card-info {
+        .job-info {
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            color: #75A4C5;
+            color: #666;
+            font-size: 0.85rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .job-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .tag-small {
+            background: #f5f5f5;
+            color: #666;
+            padding: 0.25rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            border: 1px solid #ddd;
+        }
+
+        .job-btn {
+            width: 100%;
+            padding: 10px;
+            background: #1D40AE;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .job-btn:hover {
+            background: #152e7f;
+            transform: translateY(-2px);
+        }
+
+        /* EMPLEADOR VIEW */
+        .employer-hero {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .employer-title {
+            font-size: 1.8rem;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .employer-subtitle {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .publish-btn {
+            background: #1D40AE;
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 16px;
+            box-shadow: 0 4px 12px rgba(29, 64, 174, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .publish-btn:hover {
+            background: #152e7f;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(29, 64, 174, 0.4);
+        }
+
+        .stats-section {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            text-align: center;
+        }
+
+        .stat-label {
+            color: #666;
             font-size: 0.9rem;
             margin-bottom: 0.5rem;
         }
 
-        .card-description {
-            color: #507FA9;
-            margin-bottom: 1rem;
-            line-height: 1.5;
+        .stat-value {
+            color: #1D40AE;
+            font-size: 2rem;
+            font-weight: 700;
         }
 
-        .card-tags {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-            margin-bottom: 1rem;
+        .professionals-section {
+            margin-top: 3rem;
         }
 
-        .tag {
-            background: #CADBE7;
-            color: #1B4769;
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
+        .professionals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
         }
 
-        .rating {
-            color: #507FA9;
-            font-weight: 600;
-        }
-
-        .apply-btn {
-            width: 100%;
-            padding: 0.8rem;
-            background: #507FA9;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .apply-btn:hover { background: #1B4769; transform: translateY(-2px); }
-
-        .map-container {
-            display: none;
+        .professional-card {
             background: white;
             border-radius: 15px;
             padding: 2rem;
-            height: 500px;
-            box-shadow: 0 4px 12px rgba(27, 71, 105, 0.15);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
             text-align: center;
-            align-items: center;
-            justify-content: center;
-            color: #507FA9;
-            font-size: 1.2rem;
         }
 
-        .map-container.active { display: flex; }
+        .professional-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(29, 64, 174, 0.2);
+        }
 
-        .feed-section.hidden { display: none; }
+        .professional-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1D40AE, #4169E1);
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: 700;
+            border: 4px solid #f5f5f5;
+        }
+
+        .professional-name {
+            color: #333;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .professional-specialty {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .professional-rating {
+            color: #1D40AE;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .professional-btn {
+            width: 100%;
+            padding: 10px;
+            background: white;
+            color: #1D40AE;
+            border: 2px solid #1D40AE;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .professional-btn:hover {
+            background: #1D40AE;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .nav-menu {
+                gap: 1rem;
+            }
+
+            .nav-link {
+                font-size: 14px;
+            }
+
+            .hero-title, .employer-title {
+                font-size: 1.5rem;
+            }
+
+            .stats-section {
+                gap: 1.5rem;
+            }
+
+            .stat-value {
+                font-size: 1.5rem;
+            }
+
+            .opportunities-grid,
+            .professionals-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .circle-decoration {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Círculos decorativos -->
+    <div class="circle-decoration circle-top-right"></div>
+    <div class="circle-decoration circle-top-right-second"></div>
+    <div class="circle-decoration circle-bottom-left"></div>
+
+    <!-- Header -->
     <header class="header">
-        <div class="logo">Rapi<span>chamba</span></div>
-        <div class="header-actions">
-            <button class="notification-btn">🔔<span class="notification-badge">3</span></button>
-            <div class="avatar"></div>
+        <div class="logo-section">
+            <div class="logo-icon">🏃</div>
+            <div class="logo-text">Rapichamba</div>
         </div>
+        <nav class="nav-menu">
+            <a href="#" class="nav-link">Inicio</a>
+            <a href="#" class="nav-link">Perfil</a>
+            <a href="#" class="nav-link">Notificaciones</a>
+        </nav>
     </header>
 
+    <!-- Container -->
     <div class="container">
-        <div class="user-type-toggle">
-            <button class="toggle-btn active" onclick="switchUserType('trabajador')">👷 Trabajador</button>
-            <button class="toggle-btn" onclick="switchUserType('empleador')">💼 Empleador</button>
+        <!-- User Type Toggle -->
+        <div class="user-toggle">
+            <button class="toggle-btn active" onclick="switchView('trabajador')">🏃 Soy Trabajador</button>
+            <button class="toggle-btn" onclick="switchView('empleador')">💼 Soy Empleador</button>
         </div>
 
-        <div class="search-section">
-            <div class="search-container">
-                <input type="text" class="search-input" id="searchInput" placeholder="Busca chambas cercanas" />
-                <button class="filter-btn">🔍 Filtros</button>
+        <!-- TRABAJADOR VIEW -->
+        <div id="trabajadorView" class="view-content active">
+            <div class="hero-section">
+                <h1 class="hero-title">Encuentra chambas cerca de ti</h1>
+
+                <div class="search-section">
+                    <div class="search-container">
+                        <input type="text" class="search-input" placeholder="Buscar por oficio (ej: Plomero, Pintor)..." />
+                        <button class="search-btn">Buscar</button>
+                    </div>
+
+                    <div class="categories-grid">
+                        <div class="category-item">
+                            <div class="category-icon">🧹</div>
+                            <div class="category-name">Limpieza</div>
+                        </div>
+                        <div class="category-item">
+                            <div class="category-icon">🔧</div>
+                            <div class="category-name">Reparación</div>
+                        </div>
+                        <div class="category-item">
+                            <div class="category-icon">⚙️</div>
+                            <div class="category-name">Sistemas</div>
+                        </div>
+                        <div class="category-item">
+                            <div class="category-icon">🚚</div>
+                            <div class="category-name">Mudanza</div>
+                        </div>
+                        <div class="category-item">
+                            <div class="category-icon">🎨</div>
+                            <div class="category-name">Pintura</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="view-toggle">
+                    <button class="view-btn active">Trabajos</button>
+                    <button class="view-btn">🗺️ MAPA</button>
+                </div>
+            </div>
+
+            <div class="opportunities-section">
+                <h2 class="section-title">Oportunidades Recientes</h2>
+                <div class="opportunities-grid">
+                    <div class="job-card">
+                        <div class="job-header">
+                            <div>
+                                <h3 class="job-title">Reparación de Fuga</h3>
+                                <div class="job-info">📍 Centro • ⏰ 20 min</div>
+                            </div>
+                            <div class="job-price">$500</div>
+                        </div>
+                        <div class="job-tags">
+                            <span class="tag-small">Plomería</span>
+                            <span class="tag-small">Urgente</span>
+                        </div>
+                        <button class="job-btn">Ver Detalles</button>
+                    </div>
+
+                    <div class="job-card">
+                        <div class="job-header">
+                            <div>
+                                <h3 class="job-title">Limpieza de Patio</h3>
+                                <div class="job-info">💼 Jardinería • ⏰ 3 Horas</div>
+                            </div>
+                            <div class="job-price">$400</div>
+                        </div>
+                        <div class="job-tags">
+                            <span class="tag-small">Jardín</span>
+                            <span class="tag-small">Fin de semana</span>
+                        </div>
+                        <button class="job-btn">Ver Detalles</button>
+                    </div>
+
+                    <div class="job-card">
+                        <div class="job-header">
+                            <div>
+                                <h3 class="job-title">Formato de PC</h3>
+                                <div class="job-info">📍 El Refugio • ⏰ 3 Horas</div>
+                            </div>
+                            <div class="job-price">$350</div>
+                        </div>
+                        <div class="job-tags">
+                            <span class="tag-small">Tecnología</span>
+                            <span class="tag-small">Software</span>
+                        </div>
+                        <button class="job-btn">Ver Detalles</button>
+                    </div>
+
+                    <div class="job-card">
+                        <div class="job-header">
+                            <div>
+                                <h3 class="job-title">Instalación Eléctrica</h3>
+                                <div class="job-info">📍 Centro • ⏰ 2 Horas</div>
+                            </div>
+                            <div class="job-price">$600</div>
+                        </div>
+                        <div class="job-tags">
+                            <span class="tag-small">Electricidad</span>
+                        </div>
+                        <button class="job-btn">Ver Detalles</button>
+                    </div>
+
+                    <div class="job-card">
+                        <div class="job-header">
+                            <div>
+                                <h3 class="job-title">Pintura de Casa</h3>
+                                <div class="job-info">📍 Jurica • ⏰ 1 día</div>
+                            </div>
+                            <div class="job-price">$1,500</div>
+                        </div>
+                        <div class="job-tags">
+                            <span class="tag-small">Pintura</span>
+                        </div>
+                        <button class="job-btn">Ver Detalles</button>
+                    </div>
+
+                    <div class="job-card">
+                        <div class="job-header">
+                            <div>
+                                <h3 class="job-title">Mudanza Departamento</h3>
+                                <div class="job-info">📍 Centro • ⏰ 4 Horas</div>
+                            </div>
+                            <div class="job-price">$800</div>
+                        </div>
+                        <div class="job-tags">
+                            <span class="tag-small">Mudanza</span>
+                        </div>
+                        <button class="job-btn">Ver Detalles</button>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="view-toggle">
-            <button class="view-btn active" onclick="switchView('lista')">📋 Lista</button>
-            <button class="view-btn" onclick="switchView('mapa')">🗺️ Mapa</button>
-        </div>
-
-        <div class="categories-section">
-            <h2 class="section-title">Categorías Populares</h2>
-            <div class="categories-carousel">
-                <div class="category-card"><div class="category-icon">🧹</div><div class="category-name">Limpieza</div></div>
-                <div class="category-card"><div class="category-icon">🔧</div><div class="category-name">Reparación</div></div>
-                <div class="category-card"><div class="category-icon">🚚</div><div class="category-name">Mudanza</div></div>
-                <div class="category-card"><div class="category-icon">💻</div><div class="category-name">Tecnología</div></div>
-                <div class="category-card"><div class="category-icon">🎨</div><div class="category-name">Pintura</div></div>
-                <div class="category-card"><div class="category-icon">⚡</div><div class="category-name">Electricidad</div></div>
-                <div class="category-card"><div class="category-icon">🪴</div><div class="category-name">Jardinería</div></div>
-            </div>
-        </div>
-
-        <div class="map-container" id="mapView">
-            🗺️ Vista de Mapa - Trabajos en Tiempo Real<br />
-            <small>(RF12: Integración con mapa interactivo)</small>
-        </div>
-
-        <div class="feed-section" id="feedView">
-            <div class="job-card">
-                <div class="card-header"><h3 class="card-title">Reparación de fuga</h3><div class="card-price">$500</div></div>
-                <div class="card-info">📍 A 2km de ti</div>
-                <div class="card-info">⏰ Publicado hace 15 min</div>
-                <p class="card-description">Necesito reparar una fuga en el baño urgentemente. Preferencia para hoy.</p>
-                <div class="card-tags"><span class="tag">Urgente</span><span class="tag">Plomería</span></div>
-                <button class="apply-btn">Postularme</button>
+        <!-- EMPLEADOR VIEW -->
+        <div id="empleadorView" class="view-content">
+            <div class="employer-hero">
+                <h1 class="employer-title">¿Tienes algo que reparar hoy?</h1>
+                <p class="employer-subtitle">Publica tu chamba en segundos y recibe ofertas de trabajadores verificados.</p>
+                <button class="publish-btn">+ Publicar Chamba Gratis</button>
             </div>
 
-            <div class="job-card">
-                <div class="card-header"><h3 class="card-title">Limpieza profunda</h3><div class="card-price">$800</div></div>
-                <div class="card-info">📍 A 5km de ti</div>
-                <div class="card-info">⏰ Publicado hace 1 hora</div>
-                <p class="card-description">Limpieza completa de casa de 3 habitaciones para el fin de semana.</p>
-                <div class="card-tags"><span class="tag">Limpieza</span><span class="tag">Fin de semana</span></div>
-                <button class="apply-btn">Postularme</button>
+            <div class="stats-section">
+                <div class="stat-card">
+                    <div class="stat-label">En espera</div>
+                    <div class="stat-value">2</div>
+                    <div class="stat-label">Solicitudes</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">En progreso</div>
+                    <div class="stat-value">1</div>
+                    <div class="stat-label">Chamba activa</div>
+                </div>
             </div>
 
-            <div class="job-card">
-                <div class="card-header"><h3 class="card-title">Instalación de ventilador</h3><div class="card-price">$350</div></div>
-                <div class="card-info">📍 A 1km de ti</div>
-                <div class="card-info">⏰ Publicado hace 2 horas</div>
-                <p class="card-description">Instalar ventilador de techo en sala. Incluye materiales.</p>
-                <div class="card-tags"><span class="tag">Electricidad</span></div>
-                <div class="rating">⭐ Cliente verificado</div>
-                <button class="apply-btn">Postularme</button>
-            </div>
+            <div class="professionals-section">
+                <h2 class="section-title">Profesionales Recomendados</h2>
+                <div class="professionals-grid">
+                    <div class="professional-card">
+                        <div class="professional-avatar">JP</div>
+                        <div class="professional-name">Juan Pérez ✓</div>
+                        <div class="professional-specialty">Plomero Experto</div>
+                        <div class="professional-rating">⭐ 4.9 (123 Reseñas)</div>
+                        <button class="professional-btn">Ver Perfil</button>
+                    </div>
 
-            <div class="job-card">
-                <div class="card-header"><h3 class="card-title">Pintura de habitación</h3><div class="card-price">$1,200</div></div>
-                <div class="card-info">📍 A 3km de ti</div>
-                <div class="card-info">⏰ Publicado hace 3 horas</div>
-                <p class="card-description">Pintar habitación de aprox. 15m². Pintura incluida.</p>
-                <div class="card-tags"><span class="tag">Pintura</span><span class="tag">Materiales incluidos</span></div>
-                <button class="apply-btn">Postularme</button>
-            </div>
+                    <div class="professional-card">
+                        <div class="professional-avatar">MG</div>
+                        <div class="professional-name">María García ✓</div>
+                        <div class="professional-specialty">Limpieza Profunda</div>
+                        <div class="professional-rating">⭐ 5.0 (89 Reseñas)</div>
+                        <button class="professional-btn">Ver Perfil</button>
+                    </div>
 
-            <div class="job-card">
-                <div class="card-header"><h3 class="card-title">Reparación de PC</h3><div class="card-price">$400</div></div>
-                <div class="card-info">📍 A 4km de ti</div>
-                <div class="card-info">⏰ Publicado hace 5 horas</div>
-                <p class="card-description">PC no enciende. Diagnóstico y reparación necesaria.</p>
-                <div class="card-tags"><span class="tag">Tecnología</span><span class="tag">Diagnóstico</span></div>
-                <div class="rating">⭐ 4.9 estrellas</div>
-                <button class="apply-btn">Postularme</button>
-            </div>
-
-            <div class="job-card">
-                <div class="card-header"><h3 class="card-title">Mudanza pequeña</h3><div class="card-price">$1,500</div></div>
-                <div class="card-info">📍 A 6km de ti</div>
-                <div class="card-info">⏰ Publicado hace 6 horas</div>
-                <p class="card-description">Mudanza de departamento 1 habitación. Necesito 2 personas.</p>
-                <div class="card-tags"><span class="tag">Mudanza</span><span class="tag">2 personas</span></div>
-                <button class="apply-btn">Postularme</button>
+                    <div class="professional-card">
+                        <div class="professional-avatar">CR</div>
+                        <div class="professional-name">Carlos Ruiz</div>
+                        <div class="professional-specialty">Electricista</div>
+                        <div class="professional-rating">⭐ 4.8 (76 Reseñas)</div>
+                        <button class="professional-btn">Ver Perfil</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        function switchUserType(type) {
-            const buttons = document.querySelectorAll('.user-type-toggle .toggle-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-
-            const searchInput = document.getElementById('searchInput');
-            searchInput.placeholder = type === 'trabajador'
-                ? 'Busca chambas cercanas'
-                : '¿Qué necesitas solucionar hoy?';
-        }
-
         function switchView(view) {
-            const buttons = document.querySelectorAll('.view-toggle .view-btn');
+            // Update toggle buttons
+            const buttons = document.querySelectorAll('.toggle-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
 
-            const mapView = document.getElementById('mapView');
-            const feedView = document.getElementById('feedView');
+            // Update views
+            const trabajadorView = document.getElementById('trabajadorView');
+            const empleadorView = document.getElementById('empleadorView');
 
-            if (view === 'mapa') {
-                mapView.classList.add('active');
-                feedView.classList.add('hidden');
+            if (view === 'trabajador') {
+                trabajadorView.classList.add('active');
+                empleadorView.classList.remove('active');
             } else {
-                mapView.classList.remove('active');
-                feedView.classList.remove('hidden');
+                trabajadorView.classList.remove('active');
+                empleadorView.classList.add('active');
             }
         }
     </script>

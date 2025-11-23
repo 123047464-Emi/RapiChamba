@@ -53,7 +53,44 @@ Route::get('/api/calles/{coloniaId}', [CalleController::class, 'byColonia']);
 // Habilidades
 Route::get('/api/habilidades', [HabilidadController::class, 'index']);
 
+
+//FALTANTES
+
 //Dashboard
 Route::get('/dashboardEmpleado', function () {
-    return view('dashboardEmpleado'); // tu vista Blade con el formulario
+    return view('dashboardEmpleado');
+});
+
+Route::get('/detalles', function () {
+    return view('Empleado.detalles'); 
+});
+
+Route::get('/pagosdetalles', function () {
+    return view('Empleado.pagosdetalles'); 
+});
+
+Route::get('/perfilempleado', function () {
+    return view('Empleado.perfilempleado'); 
+});
+Route::get('/dashboardEmpleado', function () {
+    return view('Empleado.dashboardEmpleado'); 
+});
+
+
+
+
+Route::get('/detalleEmpleador', function () {
+    return view('Empleador.detalleEmpleador'); 
+});
+
+Route::get('/perfilempleador', function () {
+    return view('Empleador.perfilempleador');
+});
+
+Route::get('/metodoPago', function () {
+    return view('Empleador.metodoPago'); 
+});
+
+Route::get('/dashboardEmpleador', function () {
+    return view('Empleador.dashboardEmpleador'); 
 });
