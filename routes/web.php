@@ -52,3 +52,8 @@ Route::get('/api/calles/{coloniaId}', [CalleController::class, 'byColonia']);
 
 // Habilidades
 Route::get('/api/habilidades', [HabilidadController::class, 'index']);
+
+//Dashboard
+Route::get('/dashboardEmpleado', function () {
+    return view('dashboardEmpleado'); // tu vista Blade con el formulario
+});
