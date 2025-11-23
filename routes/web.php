@@ -10,7 +10,7 @@ use App\Http\Controllers\CalleController;
 use App\Http\Controllers\HabilidadController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');    
 });
 
 
