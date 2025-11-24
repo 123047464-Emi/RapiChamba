@@ -59,21 +59,27 @@
         .logo-container {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px; /* también puedes reducir el espacio entre logo y texto */
         }
 
         .logo-placeholder {
-            width: 50px;
-            height: 50px;
+            width: 30px;   /* antes 50px */
+            height: 30px;  /* antes 50px */
             border-radius: 50%;
             background: #f5f5f5;
             border: 2px dashed #ddd;
-            font-size: 10px;
+            font-size: 8px; /* más pequeño para el texto dentro */
             color: #999;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
+        }
+
+        .logo-img {
+            width: 60px;   /* ajusta según lo que quieras */
+            height: 60px;
+            object-fit: contain; /* mantiene proporción */
         }
 
         .brand-name {
@@ -274,11 +280,13 @@
     <!-- Header -->
     <header class="header">
         <div class="logo-container">
-            <div class="logo-placeholder">Logo</div>
+            <div class="logo-circle">
+                <img src="{{ asset('img/Logo.png') }}" alt="Logo" class="logo-img">
+            </div>
             <div class="brand-name">RAPICHAMBA</div>
         </div>
         <nav class="nav-menu">
-            <a href="{{ route('empleado.dashboardEmpleado') }}">← Volver</a>
+            <a href="{{ route('empleador.dashboardEmpleador') }}">← Volver</a>
         </nav>
     </header>
 
@@ -314,7 +322,7 @@
                 </div>
             </div>
 
-            <a href="{{ route('empleado.dashboardEmpleado') }}" class="back-btn">Volver al Inicio</a>
+            <a href="{{ route('empleador.dashboardEmpleador') }}" class="back-btn">Volver al Inicio</a>
         </div>
     </div>
 </body>

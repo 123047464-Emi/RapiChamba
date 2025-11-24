@@ -17,6 +17,43 @@
             background: linear-gradient(135deg, #C1D7E6 0%, #e8f1f7 100%);
             padding: 40px 20px;
             min-height: 100vh;
+            background: #f5f5f5;
+        }
+                /* Círculos decorativos */
+        .circle-decoration {
+            position: absolute;
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .circle-top-right {
+            width: 450px;
+            height: 450px;
+            top: -100px;
+            right: -300px;
+            background: transparent;
+            border: 50px solid #1D40AE;
+            position: absolute;
+            border-radius: 50%;
+        }
+
+        .circle-top-right-second {
+            width: 500px;
+            height: 500px;
+            top: -100px;       /* muévelo hacia abajo */
+            right: -100px;    /* misma posición horizontal */
+            background: transparent;
+            border: 50px solid #1D40AE;
+            position: absolute;
+            border-radius: 50%;
+        }
+        .circle-bottom-left {
+            width: 550px;
+            height: 550px;
+            bottom: -225px; 
+            left: -200px;
+            background: transparent;
+            border: 60px solid #1D40AE;
         }
 
         .container {
@@ -291,6 +328,9 @@
 </head>
 
 <body>
+    <div class="circle-decoration circle-top-right"></div>
+    <div class="circle-decoration circle-top-right-second"></div>
+    <div class="circle-decoration circle-bottom-left"></div>
 
 <div class="container">
     <div class="header">
@@ -328,33 +368,33 @@
             <div class="section-title">📋 Datos Personales</div>
             <div class="form-grid">
                 <div class="form-group">
-                    <label>Nombre <span class="required">*</span></label>
-                    <input type="text" name="nombre" value="{{ old('nombre') }}" required>
+                    <label>Nombre <span>*</span></label>
+                    <input type="text" name="nombre" value="{{ old('nombre') }}" >
                     @error('nombre')<span class="error-text">{{ $message }}</span>@enderror
                 </div>
                 <div class="form-group">
-                    <label>Apellido Paterno <span class="required">*</span></label>
-                    <input type="text" name="apellido_paterno" value="{{ old('apellido_paterno') }}" required>
+                    <label>Apellido Paterno <span>*</span></label>
+                    <input type="text" name="apellido_paterno" value="{{ old('apellido_paterno') }}" >
                     @error('apellido_paterno')<span class="error-text">{{ $message }}</span>@enderror
                 </div>
                 <div class="form-group">
-                    <label>Apellido Materno <span class="required">*</span></label>
-                    <input type="text" name="apellido_materno" value="{{ old('apellido_materno') }}" required>
+                    <label>Apellido Materno <span>*</span></label>
+                    <input type="text" name="apellido_materno" value="{{ old('apellido_materno') }}">
                     @error('apellido_materno')<span class="error-text">{{ $message }}</span>@enderror
                 </div>
                 <div class="form-group">
-                    <label>Teléfono <span class="required">*</span></label>
-                    <input type="tel" name="telefono" value="{{ old('telefono') }}" pattern="[0-9]{10}" placeholder="10 dígitos" required>
+                    <label>Teléfono <span class=>*</span></label>
+                    <input type="tel" name="telefono" value="{{ old('telefono') }}" pattern="[0-9]{10}" placeholder="10 dígitos" >
                     @error('telefono')<span class="error-text">{{ $message }}</span>@enderror
                 </div>
                 <div class="form-group full-width">
-                    <label>Correo Electrónico <span class="required">*</span></label>
-                    <input type="email" name="correo" value="{{ old('correo') }}" required>
+                    <label>Correo Electrónico <span>*</span></label>
+                    <input type="email" name="correo" value="{{ old('correo') }}" >
                     @error('correo')<span class="error-text">{{ $message }}</span>@enderror
                 </div>
                 <div class="form-group full-width">
-                    <label>Contraseña <span class="required">*</span></label>
-                    <input type="password" name="contrasena" minlength="8" required>
+                    <label>Contraseña <span >*</span></label>
+                    <input type="password" name="contrasena" minlength="8" >
                     @error('contrasena')<span class="error-text">{{ $message }}</span>@enderror
                 </div>
             </div>
@@ -363,33 +403,33 @@
             <div class="section-title">📍 Dirección</div>
             <div class="form-grid">
                 <div class="form-group">
-                    <label>Código Postal <span class="required">*</span></label>
-                    <input type="text" name="codigo_postal" value="{{ old('codigo_postal') }}" placeholder="5 dígitos" required>
+                    <label>Código Postal <span>*</span></label>
+                    <input type="text" name="codigo_postal" value="{{ old('codigo_postal') }}" placeholder="5 dígitos">
                     @error('codigo_postal')<span class="error-text">{{ $message }}</span>@enderror
                 </div>
                 <div class="form-group">
-                    <label>Estado <span class="required">*</span></label>
-                    <input type="text" name="estado" value="{{ old('estado') }}" required>
+                    <label>Estado <span>*</span></label>
+                    <input type="text" name="estado" value="{{ old('estado') }}">
                     @error('estado')<span class="error-text">{{ $message }}</span>@enderror
                 </div>
                 <div class="form-group">
-                    <label>Municipio <span class="required">*</span></label>
-                    <input type="text" name="municipio" value="{{ old('municipio') }}" required>
+                    <label>Municipio <span>*</span></label>
+                    <input type="text" name="municipio" value="{{ old('municipio') }}" >
                     @error('municipio')<span class="error-text">{{ $message }}</span>@enderror
                 </div>
                 <div class="form-group">
-                    <label>Colonia <span class="required">*</span></label>
-                    <input type="text" name="colonia" value="{{ old('colonia') }}" required>
+                    <label>Colonia <span >*</span></label>
+                    <input type="text" name="colonia" value="{{ old('colonia') }}" >
                     @error('colonia')<span class="error-text">{{ $message }}</span>@enderror
                 </div>
                 <div class="form-group full-width">
-                    <label>Calle <span class="required">*</span></label>
-                    <input type="text" name="calle" value="{{ old('calle') }}" required>
+                    <label>Calle <span>*</span></label>
+                    <input type="text" name="calle" value="{{ old('calle') }}" >
                     @error('calle')<span class="error-text">{{ $message }}</span>@enderror
                 </div>
                 <div class="form-group">
-                    <label>Número Exterior <span class="required">*</span></label>
-                    <input type="text" name="numero_exterior" value="{{ old('numero_exterior') }}" required>
+                    <label>Número Exterior <span >*</span></label>
+                    <input type="text" name="numero_exterior" value="{{ old('numero_exterior') }}">
                     @error('numero_exterior')<span class="error-text">{{ $message }}</span>@enderror
                 </div>
                 <div class="form-group">
@@ -415,12 +455,12 @@
                 <div class="section-title">💼 Información Profesional (Empleado)</div>
                 <div class="form-grid">
                     <div class="form-group full-width">
-                        <label>Experiencia <span class="required">*</span></label>
-                        <textarea name="experiencia" required>{{ old('experiencia') }}</textarea>
+                        <label>Experiencia <span>*</span></label>
+                        <textarea name="experiencia" >{{ old('experiencia') }}</textarea>
                         @error('experiencia')<span class="error-text">{{ $message }}</span>@enderror
                     </div>
                     <div class="form-group full-width">
-                        <label>Habilidades <span class="required">*</span></label>
+                        <label>Habilidades <span>*</span></label>
                         <div class="habilidades-container">
                             <input type="text" id="habilidadInput" placeholder="Escribe una habilidad">
                             <button type="button" class="btn-add-skill" onclick="addSkill()">+ Agregar</button>
@@ -440,7 +480,7 @@
                         @error('nombre_empresa')<span class="error-text">{{ $message }}</span>@enderror
                     </div>
                     <div class="form-group full-width">
-                        <label>Descripción <span class="required">*</span></label>
+                        <label>Descripción <span>*</span></label>
                         <textarea name="descripcion">{{ old('descripcion') }}</textarea>
                         @error('descripcion')<span class="error-text">{{ $message }}</span>@enderror
                     </div>

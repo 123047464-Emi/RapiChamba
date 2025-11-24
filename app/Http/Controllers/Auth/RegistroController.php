@@ -21,7 +21,7 @@ class RegistroController extends Controller
 {
     public function registrar(Request $request)
     {
-        // Reglas comunes
+        // Reglas comune
         $rules = [
             'nombre' => 'required|string|max:255',
             'apellido_paterno' => 'required|string|max:255',

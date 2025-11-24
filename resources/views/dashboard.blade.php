@@ -510,6 +510,34 @@
             transition: all 0.3s;
             font-size: 14px;
         }
+               .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-circle {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px;
+        }
+
+        .logo-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+                .brand-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1D40AE;
+            letter-spacing: 1px;
+        }
 
         .professional-btn:hover {
             background: #1D40AE;
@@ -561,8 +589,10 @@
     <!-- Header -->
     <header class="header">
         <div class="logo-section">
-            <div class="logo-icon">🏃</div>
-            <div class="logo-text">Rapichamba</div>
+            <div class="logo-circle">
+                <img src="{{ asset('img/Logo.png') }}" alt="Logo">
+            </div>
+            <div class="brand-name">RAPICHAMBA</div>
         </div>
         <nav class="nav-menu">
             <a href="#" class="nav-link">Inicio</a>

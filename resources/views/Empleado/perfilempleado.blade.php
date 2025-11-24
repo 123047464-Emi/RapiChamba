@@ -13,7 +13,7 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: white;
+            background: #f5f5f5;
             min-height: 100vh;
             position: relative;
             overflow-x: hidden;
@@ -57,22 +57,30 @@
         .logo-container {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px; /* también puedes reducir el espacio entre logo y texto */
         }
 
         .logo-placeholder {
-            width: 50px;
-            height: 50px;
+            width: 30px;   /* antes 50px */
+            height: 30px;  /* antes 50px */
             border-radius: 50%;
             background: #f5f5f5;
             border: 2px dashed #ddd;
-            font-size: 10px;
+            font-size: 8px; /* más pequeño para el texto dentro */
             color: #999;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
         }
+
+        .logo-img {
+            width: 60px;   /* ajusta según lo que quieras */
+            height: 60px;
+            object-fit: contain; /* mantiene proporción */
+        }
+
+
 
         .brand-name {
             font-size: 24px;
@@ -324,14 +332,16 @@
     <!-- Header -->
     <header class="header">
         <div class="logo-container">
-            <div class="logo-placeholder">Logo</div>
-            <div class="brand-name">RAPICHAMBA</div>
+            <div class="logo-circle">
+                <img src="{{ asset('img/Logo.png') }}" alt="Logo" class="logo-img">
+            </div>
+            <div class="brand-name">Empleado</div>
         </div>
         <nav class="nav-menu">
-            <a  href="{{ route('empleado.dashboardEmpleado') }}" href="#">Inicio</a>
-            <a href="#">Mis Chambas</a>
-            <a href="#">Mensajes</a>
-            <a href="#">Perfil</a>
+            <a href="{{ route('empleado.dashboardEmpleado') }}">Inicio</a>
+            <a  href="{{ route('Empleado.SinTerminarEmpleado') }}">Mis Chambas</a>
+            <a  href="{{ route('Empleado.SinTerminarEmpleado') }}">Mensajes</a>
+            <a href="{{ route('Empleado.SinTerminarEmpleado') }}">Notificaciones</a>
         </nav>
     </header>
 
@@ -339,26 +349,29 @@
     <div class="profile-container">
         <!-- Profile Header -->
         <div class="profile-header">
-            <div class="profile-avatar">JD</div>
-            <h1 class="profile-name">Juan Domínguez</h1>
-            <span class="profile-type">Trabajador Verificado</span>
-            
-            <div class="rating">
-                <span class="star">★</span>
-                <span class="star">★</span>
-                <span class="star">★</span>
-                <span class="star">★</span>
-                <span class="star">★</span>
-                <span class="rating-value">(4.9 - 127 reseñas)</span>
+            <div class="profile-avatar">
+                @isset($usuario)
+                    {{ strtoupper(substr($usuario->nombre, 0, 1)) }}{{ strtoupper(substr($usuario->apellido_paterno, 0, 1)) }}
+                @endisset
             </div>
+            
+            @isset($usuario)
+                <h1 class="profile-name">
+                    {{ $usuario->nombre }} {{ $usuario->apellido_paterno }}
+                </h1>
+            @endisset
+            
+            <div class="verified-badge">Trabajador Verificado</div>
+            <div class="rating">★★★★★</div>
+            <div class="rating-text">(4.8 - 127 reseñas)</div>
 
-            <div class="profile-stats">
+            <div class="stats-container">
                 <div class="stat-item">
-                    <div class="stat-number">156</div>
+                    <div class="stat-number">{{ $trabajosCompletados ?? 156 }}</div>
                     <div class="stat-label">Trabajos completados</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">98%</div>
+                    <div class="stat-number">{{ $tasaExito ?? '98%' }}</div>
                     <div class="stat-label">Tasa de éxito</div>
                 </div>
                 <div class="stat-item">
@@ -366,55 +379,57 @@
                     <div class="stat-label">Años en la plataforma</div>
                 </div>
             </div>
-
-            <div class="action-buttons">
-                <button class="btn btn-primary">Editar Perfil</button>
-                <button class="btn btn-secondary">Compartir Perfil</button>
-            </div>
         </div>
 
-        <!-- Personal Info Section -->
+        <!-- Personal Information -->
         <div class="profile-section">
-            <h2 class="section-title">📋 Información Personal</h2>
+            <h2 class="section-title">
+                📋 Información Personal
+                <a href="#"></a>
+            </h2>
             <div class="info-grid">
                 <div class="info-item">
-                    <div class="info-label">Email</div>
-                    <div class="info-value">juan.dominguez@email.com</div>
+                    <span class="info-label">EMAIL</span>
+                    <span class="info-value">{{ $usuario->correo }}</span>
                 </div>
                 <div class="info-item">
-                    <div class="info-label">Teléfono</div>
-                    <div class="info-value">+52 442 123 4567</div>
+                    <span class="info-label">TELÉFONO</span>
+                    <span class="info-value">{{ $usuario->telefono }}</span>
                 </div>
                 <div class="info-item">
-                    <div class="info-label">Ubicación</div>
-                    <div class="info-value">Querétaro, México</div>
+                    <span class="info-label">UBICACIÓN</span>
+                    <span class="info-value">{{ $usuario->direccion }}</span>
                 </div>
                 <div class="info-item">
-                    <div class="info-label">Miembro desde</div>
-                    <div class="info-value">Junio 2022</div>
+                    <span class="info-label">MIEMBRO DESDE</span>
+                    <span class="info-value">{{ $usuario->created_at->format('F Y') }}</span>
                 </div>
             </div>
         </div>
 
-        <!-- Skills Section -->
+        <!-- Skills -->
         <div class="profile-section">
-            <h2 class="section-title">💼 Habilidades</h2>
-            <div class="skills-list">
-                <span class="skill-tag">Plomería</span>
-                <span class="skill-tag">Electricidad</span>
-                <span class="skill-tag">Carpintería</span>
-                <span class="skill-tag">Pintura</span>
-                <span class="skill-tag">Jardinería</span>
-                <span class="skill-tag">Mudanzas</span>
-                <span class="skill-tag">Reparaciones generales</span>
+            <h2 class="section-title">🎯 Habilidades</h2>
+            <div class="skills-container">
+                @forelse($habilidades ?? [] as $habilidad)
+                    <span class="skill-tag">{{ $habilidad }}</span>
+                @empty
+                    <span class="skill-tag">Plomería</span>
+                    <span class="skill-tag">Electricidad</span>
+                    <span class="skill-tag">Carpintería</span>
+                    <span class="skill-tag">Pintura</span>
+                    <span class="skill-tag">Jardinería</span>
+                    <span class="skill-tag">Mudanzas</span>
+                    <span class="skill-tag">Reparaciones generales</span>
+                @endforelse
             </div>
         </div>
 
         <!-- About Section -->
         <div class="profile-section">
             <h2 class="section-title">✍️ Sobre mí</h2>
-            <p style="color: #666; line-height: 1.8;">
-                Soy un profesional con más de 10 años de experiencia en trabajos de mantenimiento y reparaciones. Me apasiona ayudar a las personas a resolver sus problemas del hogar de manera rápida y eficiente. Cuento con todas las herramientas necesarias y estoy disponible de lunes a sábado. ¡Trabajo con garantía!
+            <p class="about-text">
+                {{ Auth::user()->descripcion ?? 'Soy un profesional con más de 10 años de experiencia en trabajos de mantenimiento y reparaciones. Me apasiona ayudar a las personas a resolver sus problemas de hogar de manera rápida y eficiente. Cuento con todas las herramientas necesarias y estoy disponible de lunes a sábado. ¡Trabajo con garantía!' }}
             </p>
         </div>
     </div>

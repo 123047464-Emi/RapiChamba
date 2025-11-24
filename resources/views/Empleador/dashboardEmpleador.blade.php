@@ -65,24 +65,32 @@
             z-index: 10;
             border-bottom: 3px solid #1D40AE;
         }
-
-        .logo-section {
+        .logo-container {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px; /* también puedes reducir el espacio entre logo y texto */
         }
 
-        .logo-icon {
-            width: 50px;
-            height: 50px;
-            border: 3px solid #1D40AE;
+        .logo-placeholder {
+            width: 30px;   /* antes 50px */
+            height: 30px;  /* antes 50px */
             border-radius: 50%;
+            background: #f5f5f5;
+            border: 2px dashed #ddd;
+            font-size: 8px; /* más pequeño para el texto dentro */
+            color: #999;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            text-align: center;
         }
 
+        .logo-img {
+            width: 60px;   /* ajusta según lo que quieras */
+            height: 60px;
+            object-fit: contain; /* mantiene proporción */
+        }
+        
         .logo-text {
             font-size: 1.5rem;
             font-weight: bold;
@@ -339,14 +347,16 @@
 
     <!-- Header -->
     <header class="header">
-        <div class="logo-section">
-            <div class="logo-icon">🏃</div>
-            <div class="logo-text">Rapichamba</div>
+        <div class="logo-container">
+            <div class="logo-circle">
+                <img src="{{ asset('img/Logo.png') }}" alt="Logo" class="logo-img">
+            </div>
+            <div class="brand-name">RAPICHAMBA</div>
         </div>
         <nav class="nav-menu">
-            <a href="#" class="nav-link">Inicio</a>
-            <a href="#" class="nav-link">Perfil</a>
-            <a href="#" class="nav-link">Notificaciones</a>
+            <a href="{{ route('empleador.dashboardEmpleador') }}">Inicio</a>
+            <a href="{{ route('Empleador.SiTerminarEmpleador') }}">Perfil</a>
+            <a href="{{ route('Empleador.SiTerminarEmpleador') }} class="nav-link">Notificaciones</a>
         </nav>
     </header>
 
@@ -356,7 +366,9 @@
         <div class="employer-hero">
             <h1 class="employer-title">¿Tienes algo que reparar hoy?</h1>
             <p class="employer-subtitle">Publica tu chamba en segundos y recibe ofertas de trabajadores verificados.</p>
-            <button class="publish-btn">+ Publicar Chamba Gratis</button>
+            <a href="{{ route('Empleador.SiTerminarEmpleador') }}" class="publish-btn">
+                + Publicar Chamba Gratis
+            </a>
         </div>
 
         <!-- Stats Section -->
@@ -374,59 +386,40 @@
         </div>
 
         <!-- Professionals Section -->
+ <!-- Professionals Section -->
         <div class="professionals-section">
             <h2 class="section-title">Profesionales Recomendados</h2>
             <div class="professionals-grid">
-                <div class="professional-card">
-                    <div class="professional-avatar">JP</div>
-                    <div class="professional-name">Juan Pérez <span class="verified-badge">✓</span></div>
-                    <div class="professional-specialty">Plomero Experto</div>
-                    <div class="professional-rating">⭐ 4.9 (123 Reseñas)</div>
-                    <button class="professional-btn">Ver Perfil</button>
-                </div>
+                @foreach($empleados as $empleado)
+                    <div class="professional-card">
+                        <!-- Avatar: iniciales del nombre -->
+                        <div class="professional-avatar">
+                            {{ strtoupper(substr($empleado->usuario->nombre,0,1)) }}{{ strtoupper(substr($empleado->usuario->apellido_paterno,0,1)) }}
+                        </div>
 
-                <div class="professional-card">
-                    <div class="professional-avatar">MG</div>
-                    <div class="professional-name">María García <span class="verified-badge">✓</span></div>
-                    <div class="professional-specialty">Limpieza Profunda</div>
-                    <div class="professional-rating">⭐ 5.0 (89 Reseñas)</div>
-                    <button class="professional-btn">Ver Perfil</button>
-                </div>
+                        <!-- Nombre completo -->
+                        <div class="professional-name">
+                            {{ $empleado->usuario->nombre }} {{ $empleado->usuario->apellido_paterno }} {{ $empleado->usuario->apellido_materno }}
+                            @if($empleado->usuario->estatus && $empleado->usuario->estatus->nombre === 'Verificado')
+                                <span class="verified-badge">✓</span>
+                            @endif
+                        </div>
 
-                <div class="professional-card">
-                    <div class="professional-avatar">CR</div>
-                    <div class="professional-name">Carlos Ruiz</div>
-                    <div class="professional-specialty">Electricista</div>
-                    <div class="professional-rating">⭐ 4.8 (76 Reseñas)</div>
-                    <button class="professional-btn">Ver Perfil</button>
-                </div>
+                        <!-- Especialidad / experiencia -->
+                        <div class="professional-specialty">
+                            {{ $empleado->experiencia }}
+                        </div>
 
-                <div class="professional-card">
-                    <div class="professional-avatar">LH</div>
-                    <div class="professional-name">Luis Hernández <span class="verified-badge">✓</span></div>
-                    <div class="professional-specialty">Pintor Profesional</div>
-                    <div class="professional-rating">⭐ 4.7 (64 Reseñas)</div>
-                    <button class="professional-btn">Ver Perfil</button>
-                </div>
+                        <!-- Rating simulado: podrías calcularlo con tareas o contratos -->
+                        <div class="professional-rating">
+                            ⭐ {{ number_format(rand(4,5) + (rand(0,9)/10), 1) }} ({{ $empleado->numTareas }} Reseñas)
+                        </div>
 
-                <div class="professional-card">
-                    <div class="professional-avatar">AR</div>
-                    <div class="professional-name">Ana Rodríguez <span class="verified-badge">✓</span></div>
-                    <div class="professional-specialty">Jardinería</div>
-                    <div class="professional-rating">⭐ 5.0 (92 Reseñas)</div>
-                    <button class="professional-btn">Ver Perfil</button>
-                </div>
-
-                <div class="professional-card">
-                    <div class="professional-avatar">RS</div>
-                    <div class="professional-name">Roberto Silva</div>
-                    <div class="professional-specialty">Técnico en Computación</div>
-                    <div class="professional-rating">⭐ 4.9 (58 Reseñas)</div>
-                    <button class="professional-btn">Ver Perfil</button>
-                </div>
+                        <button class="professional-btn">Ver Perfil</button>
+                    </div>
+                @endforeach
             </div>
         </div>
-    </div>
 @if(session('success'))
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>

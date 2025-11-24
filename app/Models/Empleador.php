@@ -13,7 +13,7 @@ class Empleador extends Model
         'nombre', 
         'idUsuario', 
         'descripcion', 
-        'numtareas'
+        'numTareas'
     ];
 
     //Un empleador es un usuario

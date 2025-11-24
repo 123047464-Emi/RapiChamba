@@ -9,12 +9,12 @@ class Contrato extends Model
     protected $table = 'contratos';
 
     protected $fillable = [
-        'fechaInicio', 
-        'fechaFin', 
+        'FechaInicio', 
+        'FechaFin', 
         'idEstatus', 
         'idTarea', 
         'idEmpleado', 
-        'idTipoContrato'
+        'idTipo'
     ];
 
     // Un contrato pertenece a un estatus
@@ -38,7 +38,7 @@ class Contrato extends Model
     // Un contrato pertenece a un tipo de contrato
     public function tipoContrato()
     {
-        return $this->belongsTo(TipoContrato::class, 'idTipoContrato', 'id');
+        return $this->belongsTo(TipoContrato::class, 'idTipo', 'id');
     }
 }
 

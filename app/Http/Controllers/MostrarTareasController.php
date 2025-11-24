@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tareas;
+use App\Models\Categorias; // 
 use Carbon\Carbon;
 
 class MostrarTareasController extends Controller
@@ -22,9 +23,13 @@ class MostrarTareasController extends Controller
             $tarea->tiempo_transcurrido = Carbon::parse($tarea->fechaPublicacion)->diffForHumans();
         }
 
-        // Pasar $tareas a la vista
-        return view('Empleado.dashboardEmpleado', compact('tareas'));
+        // Obtener categorías desde la BD
+        $categorias = Categorias::all();
+
+        // Pasar $tareas y $categorias a la vista
+        return view('Empleado.dashboardEmpleado', compact('tareas', 'categorias'));
     }
 }
+
 
 

@@ -1,12 +1,15 @@
 <?php
-
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class Usuario extends Model
+class Usuario extends Authenticatable
 {
+    use Notifiable;
+
     protected $table = 'usuarios';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'nombre',
@@ -17,22 +20,45 @@ class Usuario extends Model
         'contrasena',
         'fechainscripcion',
         'idUbicacion',
-        'idEstatus'
+        'idEstatus',
     ];
 
-    public function direccion() {
+    protected $hidden = [
+        'contrasena',
+    ];
+
+    // Campo de contraseña
+    public function getAuthPassword()
+    {
+        return $this->contrasena;
+    }
+
+    // Campo de login
+    public function getAuthIdentifierName()
+    {
+        return 'id'; // 👈 el identificador real en la BD
+    }
+    // Relaciones
+    public function direccion()
+    {
         return $this->belongsTo(Direccion::class, 'idDireccion', 'id');
     }
 
-    public function estatus() {
+    public function estatus()
+    {
         return $this->belongsTo(Estatus::class, 'idEstatus', 'id');
     }
 
-    public function empleado() {
-        return $this->hasOne(Empleado::class, 'idEmpleado', 'id');
+    public function empleado()
+    {
+        return $this->hasOne(Empleado::class, 'idUsuario', 'id');
     }
 
-    public function empleador() {
-        return $this->hasOne(Empleador::class, 'idEmpleador', 'id');
+    public function empleador()
+    {
+        return $this->hasOne(Empleador::class, 'idUsuario', 'id');
     }
+
+
+
 }

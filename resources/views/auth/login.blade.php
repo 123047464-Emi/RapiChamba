@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -301,11 +302,11 @@
         </div>
 
         <!-- Título -->
-        <h1>Crea tu cuenta</h1>
-        <p class="subtitle">Introduce tu correo electrónico para registrarte en esta aplicación</p>
+        <h1>Bienvenido de nuevo</h1>
+        <p class="subtitle">Introduce tus credenciales para acceder</p>
 
         <!-- Formulario -->
-        <form action="{{ route('login') }}" method="POST">
+        <form action="{{ route('login.submit') }}" method="POST">
             @csrf
             <div class="form-group">
                 <input 
@@ -314,13 +315,14 @@
                     class="form-input" 
                     placeholder="email@gmail.com"
                     required
+                    autofocus
                 >
             </div>
 
             <div class="form-group">
                 <input 
                     type="password" 
-                    name="contrasena" 
+                    name="password" 
                     class="form-input" 
                     placeholder="••••••••"
                     required
@@ -329,6 +331,16 @@
                     <a href="#">¿Olvidaste tu contraseña?</a>
                 </div>
             </div>
+
+            @if ($errors->any())
+                <div style="color: red; font-size: 13px; margin-bottom: 10px; text-align: left;">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
             <button type="submit" class="btn-primary">
                 Iniciar sesión
@@ -351,7 +363,7 @@
 
                 <!-- Botón para ir al registro -->
         <div class="signup-text">
-            ¿No tienes cuenta? <a href="{{ route('registro.registrar') }}">Regístrate</a>
+            ¿No tienes cuenta? <a href="{{ route('registro') }}">Regístrate</a>
         </div>
 
 
