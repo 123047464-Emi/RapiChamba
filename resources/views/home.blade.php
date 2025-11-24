@@ -9,8 +9,8 @@
         <h1>Soluciones rápidas, ingresos extra. Al alcance de un clic.</h1>
         <p>Conectamos personas que requieren apoyo con quienes pueden brindarlo. De forma segura, rápida y confiable.</p>
         <div class="hero-buttons">
-            <a href="{{ route('empleado.dashboardEmpleado') }}" class="btn btn-primary">Soy Trabajador</a>
-            <a href="{{ route('empleador.dashboardEmpleador') }}" class="btn btn-secondary">Soy Empleador</a>
+            <a href="{{ route('dashboard') }}" class="btn btn-primary">Soy Trabajador</a>
+            <a href="{{ route('dashboard') }}" class="btn btn-secondary">Soy Empleador</a>
         </div>
     </div>
 

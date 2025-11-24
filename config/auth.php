@@ -36,21 +36,16 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'empleado' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'empleados',
         ],
-
-    'empleado' => [
-        'driver' => 'session',
-        'provider' => 'users',
+        'empleador' => [
+            'driver' => 'session',
+            'provider' => 'empleadores',
+        ],
     ],
 
-    'empleador' => [
-        'driver' => 'session',
-        'provider' => 'users',
-    ],
-    ],
 
 
     /*
@@ -69,18 +64,36 @@ return [
     | Supported: "database", "eloquent"
     |
     */
+    'guards' => [
+        'empleado' => [
+            'driver' => 'session',
+            'provider' => 'empleados',
+        ],
+        'empleador' => [
+            'driver' => 'session',
+            'provider' => 'empleadores',
+        ],
+        'web' => [
+            'driver' => 'session',
+            'provider' => 'users', // tu provider general
+        ],
+    ],
 
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\Usuario::class),
+            'model' => App\Models\Usuario::class,
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'empleados' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Empleado::class,
+        ],
+        'empleadores' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Empleador::class,
+        ],
     ],
+
 
     /*
     |--------------------------------------------------------------------------

@@ -20,22 +20,23 @@ class LoginController extends Controller
         // 2. Tomar credenciales
         $credentials = $request->only('correo', 'password');
 
-        // 3. Intentar entrar como EMPLEADO
-        if (Auth::guard('empleado')->attempt($credentials)) {
+        // 3. Intentar entrar
+        if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            $usuario = Auth::guard('empleado')->user();
+            $usuario = Auth::user();
 
-            return redirect()->route('empleado.dashboardEmpleado');
-        }
+            // 4. Determinar rol según relaciones
+            if ($usuario->empleador) {
+                return redirect()->route('empleador.dashboardEmpleador');
+            }
 
-        // 4. Intentar entrar como EMPLEADOR
-        if (Auth::guard('empleador')->attempt($credentials)) {
-            $request->session()->regenerate();
+            if ($usuario->empleado) {
+                return redirect()->route('empleado.dashboardEmpleado');
+            }
 
-            $usuario = Auth::guard('empleador')->user();
-
-            return redirect()->route('empleador.dashboardEmpleador');
+            // Si no es ni empleador ni empleado, mándalo a home
+            return redirect()->route('home');
         }
 
         // 5. Si falla
@@ -60,4 +61,3 @@ class LoginController extends Controller
         return 'correo';
     }
 }
-

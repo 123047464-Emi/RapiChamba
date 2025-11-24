@@ -53,6 +53,10 @@ Route::get('/registro', function () {
     return view('auth.registro'); 
 })->name('registro');
 
+Route::get('/SinVista', function () {
+    return view('SinVista'); 
+})->name('SinVista');
+
 Route::post('/registro', [RegistroController::class, 'registrar'])->name('registro.registrar');
 
 

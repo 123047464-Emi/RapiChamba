@@ -595,9 +595,9 @@
             <div class="brand-name">RAPICHAMBA</div>
         </div>
         <nav class="nav-menu">
-            <a href="#" class="nav-link">Inicio</a>
-            <a href="#" class="nav-link">Perfil</a>
-            <a href="#" class="nav-link">Notificaciones</a>
+            <a href="{{route('home')}}" class="nav-link">Inicio</a>
+            <a href="{{route('login')}}" class="nav-link">Perfil</a>
+            <a href="{{ route('SinVista') }}" class="nav-link">Notificaciones</a>
         </nav>
     </header>
 
@@ -665,7 +665,9 @@
                             <span class="tag-small">Plomería</span>
                             <span class="tag-small">Urgente</span>
                         </div>
-                        <button class="job-btn">Ver Detalles</button>
+                        <button class="job-btn" onclick="window.location='{{ route('login') }}'">
+                            Ver Detalles
+                        </button>
                     </div>
 
                     <div class="job-card">
@@ -680,7 +682,9 @@
                             <span class="tag-small">Jardín</span>
                             <span class="tag-small">Fin de semana</span>
                         </div>
-                        <button class="job-btn">Ver Detalles</button>
+                        <button class="job-btn" onclick="window.location='{{ route('login') }}'">
+                            Ver Detalles
+                        </button>
                     </div>
 
                     <div class="job-card">
@@ -695,7 +699,9 @@
                             <span class="tag-small">Tecnología</span>
                             <span class="tag-small">Software</span>
                         </div>
-                        <button class="job-btn">Ver Detalles</button>
+                        <button class="job-btn" onclick="window.location='{{ route('login') }}'">
+                            Ver Detalles
+                        </button>
                     </div>
 
                     <div class="job-card">
@@ -709,7 +715,9 @@
                         <div class="job-tags">
                             <span class="tag-small">Electricidad</span>
                         </div>
-                        <button class="job-btn">Ver Detalles</button>
+                        <button class="job-btn" onclick="window.location='{{ route('login') }}'">
+                            Ver Detalles
+                        </button>
                     </div>
 
                     <div class="job-card">
@@ -723,7 +731,9 @@
                         <div class="job-tags">
                             <span class="tag-small">Pintura</span>
                         </div>
-                        <button class="job-btn">Ver Detalles</button>
+                        <button class="job-btn" onclick="window.location='{{ route('login') }}'">
+                            Ver Detalles
+                        </button>
                     </div>
 
                     <div class="job-card">
@@ -737,7 +747,9 @@
                         <div class="job-tags">
                             <span class="tag-small">Mudanza</span>
                         </div>
-                        <button class="job-btn">Ver Detalles</button>
+                        <button class="job-btn" onclick="window.location='{{ route('login') }}'">
+                            Ver Detalles
+                        </button>
                     </div>
                 </div>
             </div>
