@@ -133,8 +133,15 @@ class RegistroController extends Controller
 
             DB::commit();
 
-            return redirect()->back()->with('success', 'Registro exitoso');
+            if ($validated['tipo_usuario'] === 'empleado') {
+                return redirect()->route('empleado.dashboardEmpleado')
+                    ->with('success', '¡Bienvenido a RapiChamba,'. $validated['nombre'] . '!');
+            }
 
+            if ($validated['tipo_usuario'] === 'empleador') {
+                return redirect()->route('empleador.dashboardEmpleador')
+                    ->with('success', '¡Bienvenido a RapiChamba'. $validated['nombre'] . '!');
+            }
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);

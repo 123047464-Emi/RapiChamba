@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rapichamba - Trabajador</title>
     <style>
@@ -49,72 +50,65 @@
             border: 60px solid #1D40AE;
         }
 
+        /* Nuevo Header estilo imagen */
         .header {
             background: white;
-            padding: 1rem 1.5rem;
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 8px rgba(29, 64, 174, 0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             position: relative;
             z-index: 10;
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #1D40AE;
-        }
-
-        .logo span { color: #000; }
-
-        .header-actions {
+        .logo-section {
             display: flex;
-            gap: 1rem;
             align-items: center;
+            gap: 1rem;
         }
 
-        .notification-btn {
-            position: relative;
-            background: #f5f5f5;
-            border: 1px solid #ddd;
-            width: 40px;
-            height: 40px;
+        .logo-circle {
+            width: 60px;
+            height: 60px;
+            background: white;
             border-radius: 50%;
-            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s;
+            padding: 5px;
         }
 
-        .notification-btn:hover {
-            background: #e8e8e8;
-            transform: scale(1.05);
+        .logo-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
-        .notification-badge {
-            position: absolute;
-            top: -2px;
-            right: -2px;
-            background: #1D40AE;
-            color: white;
-            font-size: 0.7rem;
-            padding: 2px 6px;
-            border-radius: 10px;
+        .brand-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1D40AE;
+            letter-spacing: 1px;
         }
 
-        .avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #1D40AE, #4169E1);
-            cursor: pointer;
-            border: 2px solid #ddd;
-            transition: transform 0.3s;
+        .nav-menu {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
         }
 
-        .avatar:hover { transform: scale(1.1); }
+        .nav-menu a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #1D40AE;
+        }
 
         .container {
             max-width: 1200px;
@@ -384,6 +378,11 @@
             .circle-bottom-left {
                 display: none;
             }
+
+            .nav-menu {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
@@ -393,12 +392,19 @@
     <div class="circle-decoration circle-top-right-second"></div>
     <div class="circle-decoration circle-bottom-left"></div>
 
+    <!-- Nuevo Header -->
     <header class="header">
-        <div class="logo">Rapi<span>chamba</span></div>
-        <div class="header-actions">
-            <button class="notification-btn">🔔<span class="notification-badge">3</span></button>
-            <div class="avatar"></div>
+        <div class="logo-section">
+            <div class="logo-circle">
+                <img src="{{ asset('img/Logo.png') }}" alt="Logo">
+            </div>
+            <div class="brand-name">RAPICHAMBA</div>
         </div>
+        <nav class="nav-menu">
+            <a href="#">Inicio</a>
+            <a href="#">Perfil</a>
+            <a href="#">Notificaciones</a>
+        </nav>
     </header>
 
     <div class="container">
@@ -417,13 +423,38 @@
         <div class="categories-section">
             <h2 class="section-title">Categorías Populares</h2>
             <div class="categories-carousel">
-                <div class="category-card"><div class="category-icon">🧹</div><div class="category-name">Limpieza</div></div>
-                <div class="category-card"><div class="category-icon">🔧</div><div class="category-name">Reparación</div></div>
-                <div class="category-card"><div class="category-icon">🚚</div><div class="category-name">Mudanza</div></div>
-                <div class="category-card"><div class="category-icon">💻</div><div class="category-name">Tecnología</div></div>
-                <div class="category-card"><div class="category-icon">🎨</div><div class="category-name">Pintura</div></div>
-                <div class="category-card"><div class="category-icon">⚡</div><div class="category-name">Electricidad</div></div>
-                <div class="category-card"><div class="category-icon">🪴</div><div class="category-name">Jardinería</div></div>
+                <div class="category-card" onclick="filterByCategory('Todas')">
+                    <div class="category-icon">🏠</div>
+                    <div class="category-name">Todas</div>
+                </div>
+                <div class="category-card" onclick="filterByCategory('Limpieza')">
+                    <div class="category-icon">🧹</div>
+                    <div class="category-name">Limpieza</div>
+                </div>
+                <div class="category-card" onclick="filterByCategory('Reparación')">
+                    <div class="category-icon">🔧</div>
+                    <div class="category-name">Reparación</div>
+                </div>
+                <div class="category-card" onclick="filterByCategory('Mudanza')">
+                    <div class="category-icon">🚚</div>
+                    <div class="category-name">Mudanza</div>
+                </div>
+                <div class="category-card" onclick="filterByCategory('Tecnología')">
+                    <div class="category-icon">💻</div>
+                    <div class="category-name">Tecnología</div>
+                </div>
+                <div class="category-card" onclick="filterByCategory('Pintura')">
+                    <div class="category-icon">🎨</div>
+                    <div class="category-name">Pintura</div>
+                </div>
+                <div class="category-card" onclick="filterByCategory('Electricidad')">
+                    <div class="category-icon">⚡</div>
+                    <div class="category-name">Electricidad</div>
+                </div>
+                <div class="category-card" onclick="filterByCategory('Jardinería')">
+                    <div class="category-icon">🪴</div>
+                    <div class="category-name">Jardinería</div>
+                </div>
             </div>
         </div>
 
@@ -433,61 +464,42 @@
         </div>
 
         <div class="feed-section" id="feedView">
-            <div class="job-card">
-                <div class="card-header"><h3 class="card-title">Reparación de fuga</h3><div class="card-price">$500</div></div>
-                <div class="card-info">📍 A 2km de ti</div>
-                <div class="card-info">⏰ Publicado hace 15 min</div>
-                <p class="card-description">Necesito reparar una fuga en el baño urgentemente. Preferencia para hoy.</p>
-                <div class="card-tags"><span class="tag">Urgente</span><span class="tag">Plomería</span></div>
-                <button class="apply-btn">Postularme</button>
+            @forelse($tareas as $tarea)
+            <div class="job-card" data-category="{{ $tarea->categoria->nombre ?? 'Sin categoría' }}">
+                <div class="card-header">
+                    <h3 class="card-title">{{ $tarea->nombre }}</h3>
+                    <div class="card-price">${{ number_format($tarea->presupuesto, 0, '.', ',') }}</div>
+                </div>
+                <div class="card-info">
+                    📍 {{ $tarea->ubicacion->colonia ?? 'Ubicación no especificada' }}, {{ $tarea->ubicacion->municipio ?? '' }}
+                </div>
+                <div class="card-info">
+                    ⏰ Publicado {{ $tarea->tiempo_transcurrido ?? 'hace un momento' }}
+                </div>
+                <p class="card-description">{{ Str::limit($tarea->descripcion, 120) }}</p>
+                
+                <div class="card-tags">
+                    @if($tarea->categoria)
+                    <span class="tag">{{ $tarea->categoria->nombre }}</span>
+                    @endif
+                    
+                    @if($tarea->fechaLimite)
+                    <span class="tag">Fecha límite: {{ \Carbon\Carbon::parse($tarea->fechaLimite)->format('d/m/Y') }}</span>
+                    @endif
+                </div>
+                
+                @if($tarea->empleador && $tarea->empleador->usuario)
+                <div class="rating">⭐ Cliente: {{ $tarea->empleador->usuario->nombre ?? 'Anónimo' }}</div>
+                @endif
+                
+                <button class="apply-btn" onclick="postularse({{ $tarea->id }})">Postularme</button>
             </div>
-
-            <div class="job-card">
-                <div class="card-header"><h3 class="card-title">Limpieza profunda</h3><div class="card-price">$800</div></div>
-                <div class="card-info">📍 A 5km de ti</div>
-                <div class="card-info">⏰ Publicado hace 1 hora</div>
-                <p class="card-description">Limpieza completa de casa de 3 habitaciones para el fin de semana.</p>
-                <div class="card-tags"><span class="tag">Limpieza</span><span class="tag">Fin de semana</span></div>
-                <button class="apply-btn">Postularme</button>
+            @empty
+            <div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: #666;">
+                <h3>No hay tareas disponibles en este momento</h3>
+                <p>Vuelve más tarde para encontrar nuevas oportunidades</p>
             </div>
-
-            <div class="job-card">
-                <div class="card-header"><h3 class="card-title">Instalación de ventilador</h3><div class="card-price">$350</div></div>
-                <div class="card-info">📍 A 1km de ti</div>
-                <div class="card-info">⏰ Publicado hace 2 horas</div>
-                <p class="card-description">Instalar ventilador de techo en sala. Incluye materiales.</p>
-                <div class="card-tags"><span class="tag">Electricidad</span></div>
-                <div class="rating">⭐ Cliente verificado</div>
-                <button class="apply-btn">Postularme</button>
-            </div>
-
-            <div class="job-card">
-                <div class="card-header"><h3 class="card-title">Pintura de habitación</h3><div class="card-price">$1,200</div></div>
-                <div class="card-info">📍 A 3km de ti</div>
-                <div class="card-info">⏰ Publicado hace 3 horas</div>
-                <p class="card-description">Pintar habitación de aprox. 15m². Pintura incluida.</p>
-                <div class="card-tags"><span class="tag">Pintura</span><span class="tag">Materiales incluidos</span></div>
-                <button class="apply-btn">Postularme</button>
-            </div>
-
-            <div class="job-card">
-                <div class="card-header"><h3 class="card-title">Reparación de PC</h3><div class="card-price">$400</div></div>
-                <div class="card-info">📍 A 4km de ti</div>
-                <div class="card-info">⏰ Publicado hace 5 horas</div>
-                <p class="card-description">PC no enciende. Diagnóstico y reparación necesaria.</p>
-                <div class="card-tags"><span class="tag">Tecnología</span><span class="tag">Diagnóstico</span></div>
-                <div class="rating">⭐ 4.9 estrellas</div>
-                <button class="apply-btn">Postularme</button>
-            </div>
-
-            <div class="job-card">
-                <div class="card-header"><h3 class="card-title">Mudanza pequeña</h3><div class="card-price">$1,500</div></div>
-                <div class="card-info">📍 A 6km de ti</div>
-                <div class="card-info">⏰ Publicado hace 6 horas</div>
-                <p class="card-description">Mudanza de departamento 1 habitación. Necesito 2 personas.</p>
-                <div class="card-tags"><span class="tag">Mudanza</span><span class="tag">2 personas</span></div>
-                <button class="apply-btn">Postularme</button>
-            </div>
+            @endforelse
         </div>
     </div>
 
@@ -508,6 +520,90 @@
                 feedView.classList.remove('hidden');
             }
         }
+
+        function filterByCategory(category) {
+            const jobCards = document.querySelectorAll('.job-card');
+            const categoryCards = document.querySelectorAll('.category-card');
+            
+            // Resaltar categoría seleccionada
+            categoryCards.forEach(card => {
+                card.style.backgroundColor = 'white';
+                card.style.borderColor = '#ddd';
+            });
+            event.currentTarget.style.backgroundColor = '#e8f0fe';
+            event.currentTarget.style.borderColor = '#1D40AE';
+            
+            // Filtrar trabajos
+            jobCards.forEach(card => {
+                const cardCategories = card.getAttribute('data-category');
+                
+                if (category === 'Todas') {
+                    card.style.display = 'block';
+                } else {
+                    if (cardCategories && cardCategories.includes(category)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+
+            // Actualizar título de sección
+            const sectionTitle = document.querySelector('.section-title');
+            if (category === 'Todas') {
+                sectionTitle.textContent = 'Categorías Populares';
+            } else {
+                sectionTitle.textContent = `Categorías Populares - Mostrando: ${category}`;
+            }
+        }
+
+        function postularse(tareaId) {
+            Swal.fire({
+                title: '¿Deseas postularte a esta tarea?',
+                text: "Se enviará tu solicitud al empleador",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#1D40AE',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, postularme',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch(`/postularse/${tareaId}`, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({})
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            Swal.fire(
+                                '¡Postulado!',
+                                data.message,
+                                'success'
+                            );
+                        } else {
+                            Swal.fire(
+                                'Error',
+                                'No se pudo registrar tu postulación',
+                                'error'
+                            );
+                        }
+                    })
+                    .catch(() => {
+                        Swal.fire(
+                            'Error',
+                            'Ocurrió un problema con la conexión',
+                            'error'
+                        );
+                    });
+                }
+            });
+        }
+
     </script>
 </body>
 </html>

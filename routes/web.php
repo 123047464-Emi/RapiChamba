@@ -8,12 +8,8 @@ use App\Http\Controllers\MunicipioController;
 use App\Http\Controllers\ColoniaController;
 use App\Http\Controllers\CalleController;
 use App\Http\Controllers\HabilidadController;
+use App\Http\Controllers\MostrarTareasController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-*/
 
 // --- PÁGINAS PÚBLICAS ---
 
@@ -21,6 +17,10 @@ Route::get('/', function () {
     return view('home');    
 })->name('home');
 
+
+Route::get('/home', function () {
+    return view('home');
+});
 
 // --- AUTENTICACIÓN ---
 
@@ -45,10 +45,36 @@ Route::get('/dashboard', function () {
     return view('dashboard'); 
 })->name('dashboard');
 
+
+
+// Estados
+Route::get('/api/estados', [EstadoController::class, 'index']);
+
+// Municipios (todos o filtrados por estado)
+Route::get('/api/municipios', [MunicipioController::class, 'index']);
+Route::get('/api/municipios/{estadoId}', [MunicipioController::class, 'byEstado']);
+
+// Colonias (todas o filtradas por municipio)
+Route::get('/api/colonias', [ColoniaController::class, 'index']);
+Route::get('/api/colonias/{municipioId}', [ColoniaController::class, 'byMunicipio']);
+
+// Calles (todas o filtradas por colonia)
+Route::get('/api/calles', [CalleController::class, 'index']);
+Route::get('/api/calles/{coloniaId}', [CalleController::class, 'byColonia']);
+
+// Habilidades
+Route::get('/api/habilidades', [HabilidadController::class, 'index']);
+
+Route::get('/postulacion/{id}', [PostulacionController::class, 'create'])->name('postulacion.create');
+
+//FALTANTES
+
+//Dashboard
+
 // Empleado
-Route::get('/dashboardEmpleado', function () {
-    return view('Empleado.dashboardEmpleado'); 
-})->name('empleado.dashboard');
+//Route::get('/dashboardEmpleado', function () {
+    //return view('Empleado.dashboardEmpleado'); 
+//})->name('empleado.dashboardEmpleado');
 
 Route::get('/detalles', function () {
     return view('Empleado.detalles'); 
@@ -60,13 +86,16 @@ Route::get('/pagosdetalles', function () {
 
 Route::get('/perfilempleado', function () {
     return view('Empleado.perfilempleado'); 
-})->name('empleado.perfil');
+})->name('empleado.perfilEmpleado');;
 
+
+Route::get('/dashboardEmpleado', [MostrarTareasController::class, 'dashboardEmpleado'])
+     ->name('empleado.dashboardEmpleado');
 
 // Empleador
 Route::get('/dashboardEmpleador', function () {
     return view('Empleador.dashboardEmpleador'); 
-})->name('empleador.dashboard');
+})->name('empleador.dashboardEmpleador');
 
 Route::get('/detalleEmpleador', function () {
     return view('Empleador.detalleEmpleador'); 
@@ -81,14 +110,15 @@ Route::get('/metodoPago', function () {
 })->name('empleador.pago');
 
 
+
 // --- API / SELECTORES DINÁMICOS ---
 // (Estas rutas devuelven JSON para tus dropdowns de ubicación)
 
-Route::get('/api/estados', [EstadoController::class, 'index']);
-Route::get('/api/municipios', [MunicipioController::class, 'index']);
-Route::get('/api/municipios/{estadoId}', [MunicipioController::class, 'byEstado']);
-Route::get('/api/colonias', [ColoniaController::class, 'index']);
-Route::get('/api/colonias/{municipioId}', [ColoniaController::class, 'byMunicipio']);
-Route::get('/api/calles', [CalleController::class, 'index']);
-Route::get('/api/calles/{coloniaId}', [CalleController::class, 'byColonia']);
-Route::get('/api/habilidades', [HabilidadController::class, 'index']);
+#Route::get('/api/estados', [EstadoController::class, 'index']);
+#Route::get('/api/municipios', [MunicipioController::class, 'index']);
+#Route::get('/api/municipios/{estadoId}', [MunicipioController::class, 'byEstado']);
+#Route::get('/api/colonias', [ColoniaController::class, 'index']);
+#Route::get('/api/colonias/{municipioId}', [ColoniaController::class, 'byMunicipio']);
+#Route::get('/api/calles', [CalleController::class, 'index']);
+#Route::get('/api/calles/{coloniaId}', [CalleController::class, 'byColonia']);
+#Route::get('/api/habilidades', [HabilidadController::class, 'index']);

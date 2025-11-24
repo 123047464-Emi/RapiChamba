@@ -22,12 +22,13 @@ class Tareas extends Model
     ];
 
     //Una tarea pertenece a una ubicación 
-    public function direcciones(){
-        return $this ->belongsTo(Direcciones::class, 'idUbicacion', 'id');
+    public function ubicacion()
+    {
+        return $this->belongsTo(Direccion::class, 'idUbicacion', 'id');
     }
 
     //Una tarea pertenece a una categoría
-    public function categorias(){
+    public function categoria(){
         return $this->belongsTo(Categorias::class,'idCategoria', 'id');
     }
 
@@ -37,7 +38,7 @@ class Tareas extends Model
     }
 
     //Una tarea pertenece a un empleador
-    public function empleadores(){
-        return $this->belongsTo(Empleadores::class, 'idEmpleador', 'id');
+    public function empleador(){
+        return $this->belongsTo(Empleador::class, 'idEmpleador', 'id');
     }
 }

@@ -328,7 +328,7 @@
             <div class="brand-name">RAPICHAMBA</div>
         </div>
         <nav class="nav-menu">
-            <a href="#">Inicio</a>
+            <a  href="{{ route('empleado.dashboardEmpleado') }}" href="#">Inicio</a>
             <a href="#">Mis Chambas</a>
             <a href="#">Mensajes</a>
             <a href="#">Perfil</a>
